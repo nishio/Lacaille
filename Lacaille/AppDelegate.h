@@ -70,5 +70,6 @@ extern void CGEventPostToPid(pid_t pid, CGEventRef event) __attribute__((weak_im
 @property (nonatomic, assign) CGKeyCode propThumbL;
 @property (nonatomic, assign) CGKeyCode propThumbR;
 @property (nonatomic, assign) NSTimeInterval propTwait;
+@property (assign) IBOutlet NSTextField *multiPurposeOutput;
 
 @end

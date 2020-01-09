@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -115,40 +116,28 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="140" y="154"/>
         </menu>
         <window title="Lacaille" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="335" y="390" width="500" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="contentRect" x="335" y="390" width="500" height="434"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <value key="minSize" type="size" width="500" height="360"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="500" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="500" height="434"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView translatesAutoresizingMaskIntoConstraints="NO" id="BnT-Fb-k7X">
-                        <rect key="frame" x="13" y="10" width="474" height="344"/>
+                        <rect key="frame" x="13" y="10" width="474" height="418"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="環境設定" identifier="1" id="Wmj-OY-gRO">
                                 <view key="view" id="Fw2-XY-iL0">
-                                    <rect key="frame" x="10" y="33" width="454" height="298"/>
+                                    <rect key="frame" x="10" y="33" width="454" height="372"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button toolTip="Lacaille の設定ファイルや TESLA野良ビルド用のキー配列定義ファイルを読み込みます" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHS-P1-9of">
-                                            <rect key="frame" x="17" y="189" width="196" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="184" id="mTt-cx-78q"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="push" title="設定ファイルの読み込み…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IaL-6E-Hor">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="loadLayout:" target="494" id="p04-MC-fSa"/>
-                                            </connections>
-                                        </button>
                                         <button toolTip="Lacaille の動作を有効にします" translatesAutoresizingMaskIntoConstraints="NO" id="NrW-iE-CYC">
-                                            <rect key="frame" x="15" y="259" width="223" height="18"/>
+                                            <rect key="frame" x="15" y="333" width="223" height="18"/>
                                             <buttonCell key="cell" type="check" title="NICOLA エミュレーション" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="w41-ai-WUB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -162,7 +151,7 @@
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vgw-nM-gcf">
-                                            <rect key="frame" x="242" y="223" width="101" height="17"/>
+                                            <rect key="frame" x="242" y="300" width="101" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="同時判定時間" id="pNT-1y-1tl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -170,17 +159,17 @@
                                             </textFieldCell>
                                         </textField>
                                         <slider toolTip="同時打鍵判定時間を 0 ms から 200 ms の間で設定します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MDz-II-hlD">
-                                            <rect key="frame" x="254" y="194" width="185" height="26"/>
+                                            <rect key="frame" x="254" y="273" width="185" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="181" id="o07-Uw-rXF"/>
                                             </constraints>
-                                            <sliderCell key="cell" enabled="NO" state="on" alignment="left" minValue="0" maxValue="200" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="41" allowsTickMarkValuesOnly="YES" sliderType="linear" id="gq6-g7-ffz"/>
+                                            <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="200" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="41" allowsTickMarkValuesOnly="YES" sliderType="linear" id="gq6-g7-ffz"/>
                                             <connections>
                                                 <binding destination="494" name="value" keyPath="self.propTwait" id="2BL-oa-V54"/>
                                             </connections>
                                         </slider>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pTK-W7-Axu">
-                                            <rect key="frame" x="353" y="223" width="86" height="11"/>
+                                            <rect key="frame" x="353" y="300" width="86" height="11"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="82" id="ecr-yN-gVE"/>
                                             </constraints>
@@ -198,7 +187,7 @@
                                             </connections>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="srg-V3-lSg">
-                                            <rect key="frame" x="242" y="275" width="65" height="17"/>
+                                            <rect key="frame" x="242" y="350" width="65" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="61" id="TbK-VI-UI8"/>
                                             </constraints>
@@ -209,7 +198,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="親指左キーとして使用するキーを選択します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LEm-hX-XwM">
-                                            <rect key="frame" x="285" y="267" width="101" height="32"/>
+                                            <rect key="frame" x="285" y="341" width="101" height="32"/>
                                             <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gzO-JE-Tya">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -224,7 +213,7 @@
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-zo-wJC">
-                                            <rect key="frame" x="242" y="250" width="43" height="17"/>
+                                            <rect key="frame" x="242" y="326" width="43" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指右" id="BJ0-zd-ODz">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -232,7 +221,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="親指右キーとして使用するキーを選択します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ROu-8i-iGY">
-                                            <rect key="frame" x="285" y="241" width="101" height="32"/>
+                                            <rect key="frame" x="285" y="317" width="101" height="32"/>
                                             <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IEl-MK-qs2">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -247,13 +236,13 @@
                                             </connections>
                                         </button>
                                         <scrollView focusRingType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOS-0u-yl0">
-                                            <rect key="frame" x="20" y="14" width="414" height="149"/>
+                                            <rect key="frame" x="20" y="14" width="414" height="193"/>
                                             <clipView key="contentView" focusRingType="none" id="Oms-pL-PyO">
-                                                <rect key="frame" x="1" y="0.0" width="412" height="133"/>
+                                                <rect key="frame" x="1" y="0.0" width="412" height="192"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="eit-sR-rpY" viewBased="YES" id="0s6-2t-FnH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="657" height="110"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="412" height="169"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -370,23 +359,22 @@
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
-                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </clipView>
-                                            <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="8NJ-A3-XBz">
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="8NJ-A3-XBz">
                                                 <rect key="frame" x="1" y="133" width="412" height="15"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
-                                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="laU-df-kxf">
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="laU-df-kxf">
                                                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <tableHeaderView key="headerView" id="eit-sR-rpY">
-                                                <rect key="frame" x="0.0" y="0.0" width="657" height="23"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="412" height="23"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
                                         <button toolTip="“ユーザとグループ”システム環境設定の“ログイン項目”に Lacaille を追加します" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-1Q-qU7">
-                                            <rect key="frame" x="15" y="279" width="223" height="18"/>
+                                            <rect key="frame" x="15" y="353" width="223" height="18"/>
                                             <buttonCell key="cell" type="check" title="ログイン時に Lacaille を起動" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wza-WG-rFv">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -396,7 +384,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="左親指キーの単独打鍵を return キーとして使用します" translatesAutoresizingMaskIntoConstraints="NO" id="Tk7-yc-bfj">
-                                            <rect key="frame" x="386" y="276" width="70" height="18"/>
+                                            <rect key="frame" x="386" y="350" width="70" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="66" id="vyf-CG-KRg"/>
                                             </constraints>
@@ -409,7 +397,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="右親指キーの単独打鍵をスペースバーとして使用します" translatesAutoresizingMaskIntoConstraints="NO" id="kHc-a7-j4S">
-                                            <rect key="frame" x="386" y="249" width="70" height="18"/>
+                                            <rect key="frame" x="386" y="325" width="70" height="18"/>
                                             <buttonCell key="cell" type="check" title="変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xgm-0Q-hFB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -419,7 +407,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="親指キーを押し続けていれば、2キー目以降も同時打鍵とみなします（主に飛鳥カナ配列で使用します）" translatesAutoresizingMaskIntoConstraints="NO" id="zkB-hd-3E0">
-                                            <rect key="frame" x="15" y="239" width="223" height="18"/>
+                                            <rect key="frame" x="15" y="313" width="223" height="18"/>
                                             <buttonCell key="cell" type="check" title="連続シフトキー" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1TA-wF-EZ2">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -428,23 +416,42 @@
                                                 <binding destination="494" name="value" keyPath="self.propCshift" id="yv6-3A-DvX"/>
                                             </connections>
                                         </button>
-                                        <box horizontalHuggingPriority="249" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-Hu-cq2">
-                                            <rect key="frame" x="20" y="175" width="414" height="5"/>
+                                        <box horizontalHuggingPriority="249" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-Hu-cq2">
+                                            <rect key="frame" x="20" y="219" width="414" height="5"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="F2p-sR-K63"/>
                                             </constraints>
-                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <font key="titleFont" metaFont="system"/>
                                         </box>
+                                        <button toolTip="Lacaille の設定ファイルや TESLA野良ビルド用のキー配列定義ファイルを読み込みます" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHS-P1-9of">
+                                            <rect key="frame" x="250" y="235" width="196" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="184" id="mTt-cx-78q"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="push" title="設定ファイルの読み込み…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IaL-6E-Hor">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="loadLayout:" target="494" id="p04-MC-fSa"/>
+                                            </connections>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kk5-XA-4zx">
+                                            <rect key="frame" x="17" y="230" width="219" height="67"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Q5Z-Td-v19">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="mqY-Hu-cq2" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="20" id="1V7-Vw-bHf"/>
                                         <constraint firstItem="ROu-8i-iGY" firstAttribute="leading" secondItem="9Ss-zo-wJC" secondAttribute="trailing" constant="8" symbolic="YES" id="2TT-ch-tvL"/>
                                         <constraint firstAttribute="trailing" secondItem="pTK-W7-Axu" secondAttribute="trailing" constant="17" id="4N9-v7-628"/>
-                                        <constraint firstItem="tHS-P1-9of" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="23" id="4q2-2f-dTc"/>
+                                        <constraint firstItem="tHS-P1-9of" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="256" id="4q2-2f-dTc"/>
                                         <constraint firstAttribute="trailing" secondItem="ZOS-0u-yl0" secondAttribute="trailing" constant="20" symbolic="YES" id="5by-xj-g86"/>
-                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="120" id="5uc-nE-OEJ"/>
+                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="150" id="5uc-nE-OEJ"/>
                                         <constraint firstItem="NrW-iE-CYC" firstAttribute="leading" secondItem="zkB-hd-3E0" secondAttribute="leading" id="7mL-FK-imY"/>
                                         <constraint firstItem="Tk7-yc-bfj" firstAttribute="trailing" secondItem="kHc-a7-j4S" secondAttribute="trailing" id="CHQ-Jc-4Ch"/>
                                         <constraint firstItem="srg-V3-lSg" firstAttribute="leading" secondItem="9Ss-zo-wJC" secondAttribute="leading" id="DlG-7c-rl7"/>
@@ -478,18 +485,18 @@
                                         <constraint firstItem="NrW-iE-CYC" firstAttribute="top" secondItem="S4M-1Q-qU7" secondAttribute="bottom" constant="6" symbolic="YES" id="oY2-76-3vC"/>
                                         <constraint firstItem="9Ss-zo-wJC" firstAttribute="leading" secondItem="vgw-nM-gcf" secondAttribute="leading" id="rC8-2F-LAa"/>
                                         <constraint firstItem="S4M-1Q-qU7" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="stb-9S-oej"/>
-                                        <constraint firstItem="tHS-P1-9of" firstAttribute="top" secondItem="zkB-hd-3E0" secondAttribute="bottom" constant="24" id="tXN-hC-izD"/>
+                                        <constraint firstItem="tHS-P1-9of" firstAttribute="top" secondItem="zkB-hd-3E0" secondAttribute="bottom" constant="52" id="tXN-hC-izD"/>
                                         <constraint firstAttribute="trailing" secondItem="mqY-Hu-cq2" secondAttribute="trailing" constant="20" id="wdU-n6-UgJ"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Lacaille について" identifier="2" id="iDG-Ik-Bub">
                                 <view key="view" id="5Ho-dX-KKU">
-                                    <rect key="frame" x="10" y="33" width="454" height="298"/>
+                                    <rect key="frame" x="10" y="33" width="454" height="336"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8nk-D0-DUC">
-                                            <rect key="frame" x="18" y="273" width="418" height="22"/>
+                                            <rect key="frame" x="18" y="311" width="418" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="OC7-iB-UWY"/>
                                                 <constraint firstAttribute="height" constant="22" id="rlQ-ry-YVY"/>
@@ -501,30 +508,28 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="di1-3l-zeP">
-                                            <rect key="frame" x="20" y="27" width="414" height="197"/>
-                                            <clipView key="contentView" id="2yP-00-eUE">
-                                                <rect key="frame" x="1" y="1" width="397" height="195"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <rect key="frame" x="20" y="27" width="414" height="238"/>
+                                            <clipView key="contentView" drawsBackground="NO" id="2yP-00-eUE">
+                                                <rect key="frame" x="1" y="1" width="412" height="236"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <textView editable="NO" importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="41Y-KL-Ddr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="397" height="195"/>
+                                                    <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="41Y-KL-Ddr">
+                                                        <rect key="frame" x="0.0" y="0.0" width="412" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <size key="minSize" width="397" height="195"/>
+                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <size key="minSize" width="412" height="236"/>
                                                         <size key="maxSize" width="463" height="10000000"/>
-                                                        <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <size key="minSize" width="397" height="195"/>
-                                                        <size key="maxSize" width="463" height="10000000"/>
+                                                        <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     </textView>
                                                 </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </clipView>
-                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="xs1-Xm-vsC">
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="xs1-Xm-vsC">
                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
-                                            <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="qbv-PN-LbK">
-                                                <rect key="frame" x="398" y="1" width="15" height="195"/>
+                                            <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="qbv-PN-LbK">
+                                                <rect key="frame" x="397" y="1" width="16" height="236"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
@@ -537,7 +542,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="25e-4C-5w6">
-                                            <rect key="frame" x="18" y="232" width="418" height="12"/>
+                                            <rect key="frame" x="18" y="273" width="418" height="9"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="spK-Er-lwY">
                                                 <font key="font" size="9" name="AquaKana"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -545,12 +550,12 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRC-ZG-Chy">
-                                            <rect key="frame" x="20" y="252" width="414" height="13"/>
+                                            <rect key="frame" x="20" y="290" width="414" height="13"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="qXt-YG-gDC">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="13"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <textView editable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="qb6-FT-ZU2">
+                                                    <textView editable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="qb6-FT-ZU2">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="13"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -570,19 +575,17 @@
                                                             </fragment>
                                                         </attributedString>
                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="414" height="13"/>
-                                                        <size key="maxSize" width="414" height="13"/>
                                                     </textView>
                                                 </subviews>
                                             </clipView>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="13" id="qM8-O3-fWL"/>
                                             </constraints>
-                                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="TYW-5X-FXv">
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="TYW-5X-FXv">
                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
-                                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="yBt-Ql-o13">
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="yBt-Ql-o13">
                                                 <rect key="frame" x="-100" y="-100" width="15" height="9"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
@@ -621,6 +624,7 @@
                     <constraint firstItem="BnT-Fb-k7X" firstAttribute="top" secondItem="372" secondAttribute="top" constant="12" id="oWi-a6-SjY"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="139" y="-150"/>
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>
@@ -629,6 +633,7 @@
                 <outlet property="keyLabel1" destination="4OU-3N-1M4" id="zPd-s0-Jum"/>
                 <outlet property="keyLabel2" destination="Azx-E6-jcJ" id="ACb-qM-19t"/>
                 <outlet property="keySheet" destination="3kW-FG-rI1" id="Qty-SF-uAg"/>
+                <outlet property="multiPurposeOutput" destination="kk5-XA-4zx" id="kpc-zl-LTB"/>
                 <outlet property="oyaLabel" destination="v0n-7A-Hr6" id="Tpx-92-vQ5"/>
                 <outlet property="oyaSheet" destination="ec7-QM-BOY" id="kC1-ZJ-BsL"/>
                 <outlet property="sbMenu" destination="NEv-ui-E3r" id="XSQ-IE-RJR"/>
@@ -639,17 +644,18 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="ec7-QM-BOY" customClass="NSPanel">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="ec7-QM-BOY" customClass="NSPanel">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="112" width="230" height="87"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="JIV-I6-EYn">
                 <rect key="frame" x="0.0" y="0.0" width="230" height="87"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-Gm-Etl">
                         <rect key="frame" x="18" y="50" width="74" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="キーを入力:" id="KVF-yr-M27">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -658,6 +664,7 @@
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vxp-dn-0qh">
                         <rect key="frame" x="63" y="14" width="105" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="キャンセル" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FNK-3Q-l62">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -671,6 +678,7 @@ Gw
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v0n-7A-Hr6">
                         <rect key="frame" x="96" y="50" width="109" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="YeG-Pe-ATe">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -709,17 +717,18 @@ Gw
                 </menuItem>
             </items>
         </menu>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="3kW-FG-rI1" userLabel="Key Sheet" customClass="NSPanel">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="3kW-FG-rI1" userLabel="Key Sheet" customClass="NSPanel">
             <windowStyleMask key="styleMask" closable="YES" miniaturizable="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="112" width="230" height="136"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <view key="contentView" id="MuE-6h-n83">
                 <rect key="frame" x="0.0" y="0.0" width="230" height="136"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NBu-ae-sDf">
                         <rect key="frame" x="18" y="99" width="74" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="キーを入力:" id="Iwl-gk-eKl">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -728,6 +737,7 @@ Gw
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gga-nh-cMG">
                         <rect key="frame" x="12" y="21" width="101" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="キャンセル" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="251-lX-uZD">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -741,6 +751,7 @@ Gw
                     </button>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4OU-3N-1M4">
                         <rect key="frame" x="96" y="99" width="109" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="elB-qz-Vf4">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -749,6 +760,7 @@ Gw
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Azx-E6-jcJ">
                         <rect key="frame" x="30" y="57" width="170" height="34"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" lineBreakMode="charWrapping" truncatesLastVisibleLine="YES" sendsActionOnEndEditing="YES" title="Label" id="To7-Ij-Bi1">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -757,6 +769,7 @@ Gw
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hLi-G0-yFb">
                         <rect key="frame" x="119" y="21" width="97" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="brg-dO-emw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>

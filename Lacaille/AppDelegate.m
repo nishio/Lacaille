@@ -82,6 +82,10 @@ typedef NS_ENUM(NSInteger, LacailleErrorCode) {
     LacailleErrorSetModeCancelled DEPRECATED_ATTRIBUTE
 };
 
+int backSpaceCount = 0;
+int japaneseCharacterCount = 0;
+
+
 - (BOOL)startAtLogin {
     NSURL *itemURL = [NSURL fileURLWithPath:[NSBundle mainBundle].bundlePath];
     
@@ -735,6 +739,9 @@ static NSData *convTraditionalKeyData(NSData *in) {
                                                  name:NSWindowWillCloseNotification
                                                object:_window];
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
+
+    self.multiPurposeOutput.stringValue = [NSString stringWithFormat: @"[BackSpace] %d\n[Japanese] %d", backSpaceCount, japaneseCharacterCount];
+
 }
 - (IBAction)showAboutBox:(id)sender {
     // [NSApp orderFrontStandardAboutPanel:sender];
@@ -1082,6 +1089,18 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
     debugOut(@"[EV] Keycode=%d, Flags=<%llx>, Type=%d, gTargetPid=%d\n",
              (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode), (CGEventFlags)CGEventGetFlags(event), type, gTargetPid);
     
+    bool isCtrlH = (
+        CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode) == 4 &&
+        CGEventGetFlags(event) == 0x40101);
+    bool isBackSpace = (
+        CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode) == 51 &&
+        CGEventGetFlags(event) == 0x100);
+
+    if (type != kCGEventKeyDown && (isCtrlH || isBackSpace)){
+        backSpaceCount++;
+        debugOut(@"[BackSpace] %d\n", backSpaceCount);
+    }
+    
     CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
     
     // 同時判定時間を過ぎていたら親指キーを戻す
@@ -1257,13 +1276,14 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
                 gBuff = keycode;
                 startTimer(0);
                 fireTimer();
-                
+                japaneseCharacterCount++;
+
             } else if (gBuff != 0xff) {     // 文字キー → 親指キー
                 gOya = ((keycode == prefThumbL) ? 1 :
                         (keycode == prefThumbR) ? 2 :
                         (prefCshift) ? gOya : 0);
                 fireTimer();
-                
+
                 if (keycode == prefThumbL || keycode == prefThumbR) {
                     gOyaKeyDownTimeStamp = [NSDate date];
                 } else {
@@ -1278,7 +1298,7 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
             } else {    // 親指なし → 文字キー
                 gBuff = keycode;
                 startTimer(0);
-                
+                japaneseCharacterCount++;
             }
         } else if (type == kCGEventKeyUp) {
             if (prefCshift && (keycode == prefThumbL || keycode == prefThumbR)) {
