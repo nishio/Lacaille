@@ -85,6 +85,18 @@ typedef NS_ENUM(NSInteger, LacailleErrorCode) {
 int backSpaceCount = 0;
 int japaneseCharacterCount = 0;
 
+- (IBAction)refreshCount:(id)sender{
+    NSString* format = @"[BackSpace] %d\n[Japanese] %d";
+    NSString* s = [NSString stringWithFormat:format, backSpaceCount, japaneseCharacterCount];
+    self.multiPurposeOutput.stringValue = s;
+}
+
+- (IBAction)resetCount:(id)sender{
+    backSpaceCount = 0;
+    japaneseCharacterCount = 0;
+    [self refreshCount:sender];
+}
+
 
 - (BOOL)startAtLogin {
     NSURL *itemURL = [NSURL fileURLWithPath:[NSBundle mainBundle].bundlePath];
@@ -740,8 +752,7 @@ static NSData *convTraditionalKeyData(NSData *in) {
                                                object:_window];
     [[NSRunningApplication currentApplication] activateWithOptions:(NSApplicationActivateAllWindows | NSApplicationActivateIgnoringOtherApps)];
 
-    self.multiPurposeOutput.stringValue = [NSString stringWithFormat: @"[BackSpace] %d\n[Japanese] %d", backSpaceCount, japaneseCharacterCount];
-
+    [self refreshCount:sender];
 }
 - (IBAction)showAboutBox:(id)sender {
     // [NSApp orderFrontStandardAboutPanel:sender];

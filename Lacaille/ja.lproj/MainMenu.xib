@@ -436,7 +436,7 @@
                                             </connections>
                                         </button>
                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kk5-XA-4zx">
-                                            <rect key="frame" x="17" y="230" width="219" height="67"/>
+                                            <rect key="frame" x="17" y="242" width="219" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Q5Z-Td-v19">
                                                 <font key="font" metaFont="system"/>
@@ -444,6 +444,28 @@
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KaC-7V-Jka">
+                                            <rect key="frame" x="116" y="214" width="126" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="push" title="リセット" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hMC-63-VY9">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="13" name=".HiraKakuInterface-W3"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="resetCount:" target="494" id="Ofv-He-FqE"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-gt-tUv">
+                                            <rect key="frame" x="11" y="214" width="117" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="push" title="更新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QjD-DI-8T5">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="13" name=".HiraKakuInterface-W3"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="refreshCount:" target="494" id="rqF-ib-xtJ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="mqY-Hu-cq2" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="20" id="1V7-Vw-bHf"/>
