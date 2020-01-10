@@ -3,7 +3,7 @@
 //  Lacaille
 //
 //  Created by kkadowaki on 2014.04.26.
-//  Copyright (c) 2014-2016 kkadowaki. All rights reserved.
+//  Copyright (c) 2014-2018 kkadowaki. All rights reserved.
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -42,6 +42,17 @@ extern void CGEventPostToPid(pid_t pid, CGEventRef event) __attribute__((weak_im
 - (IBAction)loadLayout:(id)sender;
 - (IBAction)selectThumbL:(id)sender;
 - (IBAction)selectThumbR:(id)sender;
+
+@property (assign) IBOutlet NSButton *normalRadioButtonForSingleThumbL;
+@property (assign) IBOutlet NSButton *firstIgnoranceRadioButtonForSingleThumbL;
+@property (assign) IBOutlet NSButton *returnemuRadioButtonForSingleThumbL;
+- (IBAction)radioSingleThumbL:(id)sender;
+
+@property (assign) IBOutlet NSButton *normalRadioButtonForSingleThumbR;
+@property (assign) IBOutlet NSButton *firstIgnoranceRadioButtonForSingleThumbR;
+@property (assign) IBOutlet NSButton *spaceemuRadioButtonForSingleThumbR;
+- (IBAction)radioSingleThumbR:(id)sender;
+
 @property (assign) IBOutlet NSTabView *tabView;
 @property (assign) IBOutlet NSTextField *versionBox;
 @property (assign) IBOutlet NSTextView *aboutBox;
@@ -65,6 +76,8 @@ extern void CGEventPostToPid(pid_t pid, CGEventRef event) __attribute__((weak_im
 @property (nonatomic, assign) NSArray* propLayout;
 @property (nonatomic, assign) BOOL propEnabled;
 @property (nonatomic, assign) BOOL propCshift;
+@property (nonatomic, assign) BOOL propFirstIgnoredSingleThumbL;
+@property (nonatomic, assign) BOOL propFirstIgnoredSingleThumbR;
 @property (nonatomic, assign) BOOL propReturnemu;
 @property (nonatomic, assign) BOOL propSpaceemu;
 @property (nonatomic, assign) CGKeyCode propThumbL;

@@ -120,24 +120,34 @@
         </menu>
         <window title="Lacaille" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="335" y="390" width="500" height="434"/>
+            <rect key="contentRect" x="335" y="390" width="520" height="380"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <value key="minSize" type="size" width="500" height="360"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="500" height="434"/>
+                <rect key="frame" x="0.0" y="0.0" width="520" height="380"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView translatesAutoresizingMaskIntoConstraints="NO" id="BnT-Fb-k7X">
-                        <rect key="frame" x="13" y="10" width="474" height="418"/>
+                        <rect key="frame" x="13" y="10" width="494" height="364"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="環境設定" identifier="1" id="Wmj-OY-gRO">
                                 <view key="view" id="Fw2-XY-iL0">
-                                    <rect key="frame" x="10" y="33" width="454" height="372"/>
+                                    <rect key="frame" x="10" y="33" width="474" height="318"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
+                                        <button toolTip="“ユーザとグループ”システム環境設定の“ログイン項目”に Lacaille を追加します" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-1Q-qU7">
+                                            <rect key="frame" x="15" y="299" width="183" height="18"/>
+                                            <buttonCell key="cell" type="check" title="ログイン時に Lacaille を起動" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wza-WG-rFv">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="494" name="value" keyPath="self.startAtLogin" id="y29-Yq-f46"/>
+                                            </connections>
+                                        </button>
                                         <button toolTip="Lacaille の動作を有効にします" translatesAutoresizingMaskIntoConstraints="NO" id="NrW-iE-CYC">
-                                            <rect key="frame" x="15" y="333" width="223" height="18"/>
+                                            <rect key="frame" x="15" y="279" width="170" height="18"/>
                                             <buttonCell key="cell" type="check" title="NICOLA エミュレーション" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="w41-ai-WUB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -150,29 +160,26 @@
                                                 </binding>
                                             </connections>
                                         </button>
+                                        <button toolTip="親指キーを押し続けていれば、2キー目以降も同時打鍵とみなします（主に飛鳥カナ配列で使用します）" translatesAutoresizingMaskIntoConstraints="NO" id="zkB-hd-3E0">
+                                            <rect key="frame" x="15" y="259" width="107" height="18"/>
+                                            <buttonCell key="cell" type="check" title="連続シフトキー" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1TA-wF-EZ2">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="494" name="value" keyPath="self.propCshift" id="yv6-3A-DvX"/>
+                                            </connections>
+                                        </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vgw-nM-gcf">
-                                            <rect key="frame" x="242" y="300" width="101" height="16"/>
+                                            <rect key="frame" x="15" y="215" width="77" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="同時判定時間" id="pNT-1y-1tl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <slider toolTip="同時打鍵判定時間を 0 ms から 200 ms の間で設定します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MDz-II-hlD">
-                                            <rect key="frame" x="254" y="273" width="185" height="24"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="181" id="o07-Uw-rXF"/>
-                                            </constraints>
-                                            <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="200" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="41" allowsTickMarkValuesOnly="YES" sliderType="linear" id="gq6-g7-ffz"/>
-                                            <connections>
-                                                <binding destination="494" name="value" keyPath="self.propTwait" id="2BL-oa-V54"/>
-                                            </connections>
-                                        </slider>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pTK-W7-Axu">
-                                            <rect key="frame" x="353" y="300" width="86" height="11"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="82" id="ecr-yN-gVE"/>
-                                            </constraints>
+                                            <rect key="frame" x="170" y="215" width="28" height="11"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="Pqg-qk-rMx">
                                                 <font key="font" metaFont="miniSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -186,19 +193,27 @@
                                                 </binding>
                                             </connections>
                                         </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="srg-V3-lSg">
-                                            <rect key="frame" x="242" y="350" width="65" height="16"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="61" id="TbK-VI-UI8"/>
-                                            </constraints>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指左" id="bwf-bN-dBA">
+                                        <slider toolTip="同時打鍵判定時間を 0 ms から 200 ms の間で設定します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MDz-II-hlD">
+                                            <rect key="frame" x="15" y="179" width="183" height="24"/>
+                                            <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="200" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="41" allowsTickMarkValuesOnly="YES" sliderType="linear" id="gq6-g7-ffz"/>
+                                            <connections>
+                                                <binding destination="494" name="value" keyPath="self.propTwait" id="2BL-oa-V54"/>
+                                            </connections>
+                                        </slider>
+                                        <textField id="JjT-nw-IsD">
+                                            <rect key="frame" x="-2" y="0.0" width="4" height="0.0"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指左" id="bwf-bN-dBB">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="親指左キーとして使用するキーを選択します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LEm-hX-XwM">
-                                            <rect key="frame" x="285" y="341" width="101" height="32"/>
+                                            <rect key="frame" x="265" y="287" width="100" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="U56-Sj-QHg"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gzO-JE-Tya">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -212,8 +227,38 @@
                                                 </binding>
                                             </connections>
                                         </button>
+                                        <button toolTip="左親指キーを単独打鍵した際に、割り当てたキーを打鍵したとみなします" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IqA-pS-WrM">
+                                            <rect key="frame" x="270" y="268" width="47" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="通常" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Vsp-5t-V8J">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="radioSingleThumbL:" target="494" id="ExI-MK-tCh"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="左親指キーを2回連続で打鍵した際に、割り当てたキーを打鍵したとみなします" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-sq-cZP">
+                                            <rect key="frame" x="323" y="268" width="71" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="初回無効" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0he-6R-xHt">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="radioSingleThumbL:" target="494" id="Dfz-By-ReH"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="左親指キーの単独打鍵を return キーとして使用します" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tk7-yc-bfj">
+                                            <rect key="frame" x="400" y="268" width="59" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="無変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q0U-sY-qqf">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="radioSingleThumbL:" target="494" id="FTE-1m-IeU"/>
+                                            </connections>
+                                        </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-zo-wJC">
-                                            <rect key="frame" x="242" y="326" width="43" height="16"/>
+                                            <rect key="frame" x="223" y="242" width="41" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指右" id="BJ0-zd-ODz">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -221,7 +266,10 @@
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="親指右キーとして使用するキーを選択します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ROu-8i-iGY">
-                                            <rect key="frame" x="285" y="317" width="101" height="32"/>
+                                            <rect key="frame" x="265" y="232" width="100" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="QBN-PK-pus"/>
+                                            </constraints>
                                             <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IEl-MK-qs2">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -235,20 +283,63 @@
                                                 </binding>
                                             </connections>
                                         </button>
+                                        <button toolTip="右親指キーを単独打鍵した際に、割り当てたキーを打鍵したとみなします" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmt-BG-nFJ">
+                                            <rect key="frame" x="270" y="213" width="47" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="通常" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="TaQ-24-eXE">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="radioSingleThumbR:" target="494" id="SCr-bP-1Fh"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="右親指キーを2回連続で打鍵した際に、割り当てたキーを打鍵したとみなします" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="9H2-cR-FLS">
+                                            <rect key="frame" x="323" y="213" width="71" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="初回無効" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="33n-eb-9U8">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="radioSingleThumbR:" target="494" id="pHI-Rq-DQk"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="右親指キーの単独打鍵をスペースバーとして使用します" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="kHc-a7-j4S">
+                                            <rect key="frame" x="400" y="213" width="59" height="18"/>
+                                            <buttonCell key="cell" type="radio" title="変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xgm-0Q-hFB">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="radioSingleThumbR:" target="494" id="gIg-OD-0hu"/>
+                                            </connections>
+                                        </button>
+                                        <button toolTip="Lacaille の設定ファイルや TESLA野良ビルド用のキー配列定義ファイルを読み込みます" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHS-P1-9of">
+                                            <rect key="frame" x="280" y="176" width="183" height="32"/>
+                                            <buttonCell key="cell" type="push" title="設定ファイルの読み込み…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IaL-6E-Hor">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="loadLayout:" target="494" id="p04-MC-fSa"/>
+                                            </connections>
+                                        </button>
+                                        <box horizontalHuggingPriority="249" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-Hu-cq2">
+                                            <rect key="frame" x="17" y="169" width="440" height="5"/>
+                                        </box>
                                         <scrollView focusRingType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOS-0u-yl0">
-                                            <rect key="frame" x="20" y="14" width="414" height="193"/>
+                                            <rect key="frame" x="17" y="17" width="440" height="143"/>
                                             <clipView key="contentView" focusRingType="none" id="Oms-pL-PyO">
-                                                <rect key="frame" x="1" y="0.0" width="412" height="192"/>
+                                                <rect key="frame" x="1" y="0.0" width="438" height="142"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="eit-sR-rpY" viewBased="YES" id="0s6-2t-FnH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="412" height="169"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="119"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
-                                                            <tableColumn identifier="keycode" width="42" minWidth="42" maxWidth="120" id="Ey6-ND-lUV">
+                                                            <tableColumn identifier="keycode" width="64" minWidth="42" maxWidth="120" id="Ey6-ND-lUV">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="キー">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -261,7 +352,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="center" width="47" minWidth="47" maxWidth="300" id="QfU-7n-Wdh">
+                                                            <tableColumn identifier="center" width="51" minWidth="47" maxWidth="300" id="QfU-7n-Wdh">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="単独打鍵">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -274,7 +365,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="left" width="47" minWidth="47" maxWidth="300" id="cas-Md-lXA">
+                                                            <tableColumn identifier="left" width="51" minWidth="47" maxWidth="300" id="cas-Md-lXA">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="親指左">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -287,7 +378,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="right" width="47" minWidth="47" maxWidth="300" id="hEz-iL-U7J">
+                                                            <tableColumn identifier="right" width="50" minWidth="47" maxWidth="300" id="hEz-iL-U7J">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="親指右">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -300,7 +391,7 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="outer" width="47" minWidth="47" maxWidth="300" id="LIS-LZ-cEu">
+                                                            <tableColumn identifier="outer" width="51" minWidth="47" maxWidth="300" id="LIS-LZ-cEu">
                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="小指シフト">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -313,8 +404,8 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="ascii" width="47" minWidth="47" maxWidth="300" id="AKq-Sr-Ogh">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="単独打鍵（英）">
+                                                            <tableColumn identifier="ascii" width="52" minWidth="47" maxWidth="300" id="AKq-Sr-Ogh">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="英単独">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -326,8 +417,8 @@
                                                                 </textFieldCell>
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             </tableColumn>
-                                                            <tableColumn identifier="shift" width="47" minWidth="47" maxWidth="300" id="JlM-OB-ann">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="シフト（英）">
+                                                            <tableColumn identifier="shift" width="48" minWidth="47" maxWidth="300" id="JlM-OB-ann">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="英シフト">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -369,160 +460,85 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <tableHeaderView key="headerView" id="eit-sR-rpY">
-                                                <rect key="frame" x="0.0" y="0.0" width="412" height="23"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="438" height="23"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
-                                        <button toolTip="“ユーザとグループ”システム環境設定の“ログイン項目”に Lacaille を追加します" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-1Q-qU7">
-                                            <rect key="frame" x="15" y="353" width="223" height="18"/>
-                                            <buttonCell key="cell" type="check" title="ログイン時に Lacaille を起動" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wza-WG-rFv">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <binding destination="494" name="value" keyPath="self.startAtLogin" id="y29-Yq-f46"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="左親指キーの単独打鍵を return キーとして使用します" translatesAutoresizingMaskIntoConstraints="NO" id="Tk7-yc-bfj">
-                                            <rect key="frame" x="386" y="350" width="70" height="18"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="66" id="vyf-CG-KRg"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="check" title="無変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q0U-sY-qqf">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <binding destination="494" name="value" keyPath="self.propReturnemu" id="LsJ-BN-fqu"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="右親指キーの単独打鍵をスペースバーとして使用します" translatesAutoresizingMaskIntoConstraints="NO" id="kHc-a7-j4S">
-                                            <rect key="frame" x="386" y="325" width="70" height="18"/>
-                                            <buttonCell key="cell" type="check" title="変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xgm-0Q-hFB">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <binding destination="494" name="value" keyPath="self.propSpaceemu" id="2ax-Ph-a9n"/>
-                                            </connections>
-                                        </button>
-                                        <button toolTip="親指キーを押し続けていれば、2キー目以降も同時打鍵とみなします（主に飛鳥カナ配列で使用します）" translatesAutoresizingMaskIntoConstraints="NO" id="zkB-hd-3E0">
-                                            <rect key="frame" x="15" y="313" width="223" height="18"/>
-                                            <buttonCell key="cell" type="check" title="連続シフトキー" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1TA-wF-EZ2">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <binding destination="494" name="value" keyPath="self.propCshift" id="yv6-3A-DvX"/>
-                                            </connections>
-                                        </button>
-                                        <box horizontalHuggingPriority="249" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-Hu-cq2">
-                                            <rect key="frame" x="20" y="219" width="414" height="5"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="1" id="F2p-sR-K63"/>
-                                            </constraints>
-                                        </box>
-                                        <button toolTip="Lacaille の設定ファイルや TESLA野良ビルド用のキー配列定義ファイルを読み込みます" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHS-P1-9of">
-                                            <rect key="frame" x="250" y="235" width="196" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="184" id="mTt-cx-78q"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="push" title="設定ファイルの読み込み…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IaL-6E-Hor">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="loadLayout:" target="494" id="p04-MC-fSa"/>
-                                            </connections>
-                                        </button>
-                                        <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kk5-XA-4zx">
-                                            <rect key="frame" x="17" y="242" width="219" height="65"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Q5Z-Td-v19">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="srg-V3-lSg">
+                                            <rect key="frame" x="223" y="297" width="41" height="16"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指左" id="bwf-bN-dBA">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KaC-7V-Jka">
-                                            <rect key="frame" x="116" y="214" width="126" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="リセット" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hMC-63-VY9">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="13" name=".HiraKakuInterface-W3"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="resetCount:" target="494" id="Ofv-He-FqE"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-gt-tUv">
-                                            <rect key="frame" x="11" y="214" width="117" height="32"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="push" title="更新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QjD-DI-8T5">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" size="13" name=".HiraKakuInterface-W3"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="refreshCount:" target="494" id="rqF-ib-xtJ"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="20" id="1V7-Vw-bHf"/>
-                                        <constraint firstItem="ROu-8i-iGY" firstAttribute="leading" secondItem="9Ss-zo-wJC" secondAttribute="trailing" constant="8" symbolic="YES" id="2TT-ch-tvL"/>
-                                        <constraint firstAttribute="trailing" secondItem="pTK-W7-Axu" secondAttribute="trailing" constant="17" id="4N9-v7-628"/>
-                                        <constraint firstItem="tHS-P1-9of" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="256" id="4q2-2f-dTc"/>
-                                        <constraint firstAttribute="trailing" secondItem="ZOS-0u-yl0" secondAttribute="trailing" constant="20" symbolic="YES" id="5by-xj-g86"/>
-                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="150" id="5uc-nE-OEJ"/>
-                                        <constraint firstItem="NrW-iE-CYC" firstAttribute="leading" secondItem="zkB-hd-3E0" secondAttribute="leading" id="7mL-FK-imY"/>
-                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="trailing" secondItem="kHc-a7-j4S" secondAttribute="trailing" id="CHQ-Jc-4Ch"/>
-                                        <constraint firstItem="srg-V3-lSg" firstAttribute="leading" secondItem="9Ss-zo-wJC" secondAttribute="leading" id="DlG-7c-rl7"/>
-                                        <constraint firstItem="pTK-W7-Axu" firstAttribute="trailing" secondItem="MDz-II-hlD" secondAttribute="trailing" id="E1N-UG-DxZ"/>
-                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="baseline" secondItem="kHc-a7-j4S" secondAttribute="baseline" id="FeT-Zu-jKg"/>
-                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="ROu-8i-iGY" secondAttribute="leading" id="G8w-CU-Wlr"/>
-                                        <constraint firstItem="pTK-W7-Axu" firstAttribute="leading" secondItem="vgw-nM-gcf" secondAttribute="trailing" constant="14" id="Jb1-6T-4YY"/>
-                                        <constraint firstItem="kHc-a7-j4S" firstAttribute="leading" secondItem="ROu-8i-iGY" secondAttribute="trailing" constant="8" symbolic="YES" id="JjM-TJ-k4V"/>
-                                        <constraint firstAttribute="bottom" secondItem="ZOS-0u-yl0" secondAttribute="bottom" constant="14" id="JwM-MP-OLG"/>
-                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="3" id="K0j-15-HvK"/>
-                                        <constraint firstItem="ZOS-0u-yl0" firstAttribute="top" secondItem="mqY-Hu-cq2" secondAttribute="bottom" constant="14" id="LPC-eG-iiQ"/>
-                                        <constraint firstItem="vgw-nM-gcf" firstAttribute="bottom" secondItem="pTK-W7-Axu" secondAttribute="bottom" id="MRg-Q4-z8h"/>
-                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="LEm-hX-XwM" secondAttribute="trailing" constant="8" symbolic="YES" id="Q4a-9L-oPG"/>
-                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="baseline" secondItem="Tk7-yc-bfj" secondAttribute="baseline" id="R5w-HF-DlO"/>
-                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="leading" secondItem="NrW-iE-CYC" secondAttribute="leading" id="RZ0-MS-Dtk"/>
-                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="top" secondItem="LEm-hX-XwM" secondAttribute="top" id="Rpc-Qc-TJ1"/>
-                                        <constraint firstItem="ZOS-0u-yl0" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="20" symbolic="YES" id="SoA-TP-yRF"/>
-                                        <constraint firstItem="zkB-hd-3E0" firstAttribute="top" secondItem="NrW-iE-CYC" secondAttribute="bottom" constant="6" symbolic="YES" id="TW6-D7-Xvr"/>
-                                        <constraint firstItem="MDz-II-hlD" firstAttribute="top" secondItem="vgw-nM-gcf" secondAttribute="bottom" constant="3" id="Vf4-sQ-IkU"/>
-                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="top" secondItem="srg-V3-lSg" secondAttribute="bottom" constant="8" symbolic="YES" id="XXw-uX-tPA"/>
-                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="S4M-1Q-qU7" secondAttribute="trailing" constant="55" id="YYb-kF-eYy"/>
-                                        <constraint firstAttribute="trailing" secondItem="Tk7-yc-bfj" secondAttribute="trailing" id="a6I-wI-1Zw"/>
-                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="leading" secondItem="zkB-hd-3E0" secondAttribute="trailing" constant="8" symbolic="YES" id="b7B-tU-CNo"/>
-                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="kHc-a7-j4S" secondAttribute="leading" id="bky-9R-xGA"/>
-                                        <constraint firstItem="srg-V3-lSg" firstAttribute="top" secondItem="Tk7-yc-bfj" secondAttribute="top" id="c4T-aI-3TB"/>
-                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="srg-V3-lSg" secondAttribute="trailing" constant="83" id="dc8-l2-ksf"/>
-                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="leading" secondItem="NrW-iE-CYC" secondAttribute="trailing" constant="8" symbolic="YES" id="dk4-tU-Xeb"/>
-                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="centerY" secondItem="ROu-8i-iGY" secondAttribute="centerY" id="ffH-ix-eCG"/>
-                                        <constraint firstItem="srg-V3-lSg" firstAttribute="leading" secondItem="S4M-1Q-qU7" secondAttribute="trailing" constant="8" symbolic="YES" id="h0w-AZ-iE9"/>
-                                        <constraint firstItem="vgw-nM-gcf" firstAttribute="top" secondItem="ROu-8i-iGY" secondAttribute="bottom" constant="8" symbolic="YES" id="lLX-YH-CqD"/>
-                                        <constraint firstItem="NrW-iE-CYC" firstAttribute="top" secondItem="S4M-1Q-qU7" secondAttribute="bottom" constant="6" symbolic="YES" id="oY2-76-3vC"/>
-                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="leading" secondItem="vgw-nM-gcf" secondAttribute="leading" id="rC8-2F-LAa"/>
-                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="stb-9S-oej"/>
-                                        <constraint firstItem="tHS-P1-9of" firstAttribute="top" secondItem="zkB-hd-3E0" secondAttribute="bottom" constant="52" id="tXN-hC-izD"/>
-                                        <constraint firstAttribute="trailing" secondItem="mqY-Hu-cq2" secondAttribute="trailing" constant="20" id="wdU-n6-UgJ"/>
+                                        <constraint firstItem="srg-V3-lSg" firstAttribute="centerY" secondItem="LEm-hX-XwM" secondAttribute="centerY" id="2Og-Am-Qgu"/>
+                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="3o2-fC-dlF"/>
+                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="srg-V3-lSg" secondAttribute="trailing" constant="9" id="43q-da-7Sw"/>
+                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="IqA-pS-WrM" secondAttribute="leading" id="50w-gm-Sn2"/>
+                                        <constraint firstItem="NrW-iE-CYC" firstAttribute="top" secondItem="S4M-1Q-qU7" secondAttribute="bottom" constant="6" id="6ul-87-ZUN"/>
+                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="trailing" secondItem="kHc-a7-j4S" secondAttribute="trailing" id="7GD-Hc-cXI"/>
+                                        <constraint firstItem="ROu-8i-iGY" firstAttribute="top" secondItem="IqA-pS-WrM" secondAttribute="bottom" constant="9" id="8Fh-FL-eeB"/>
+                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="MDz-II-hlD" secondAttribute="bottom" constant="9" id="9Da-0T-WAy"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NrW-iE-CYC" secondAttribute="trailing" constant="20" symbolic="YES" id="9Hk-8R-5Ca"/>
+                                        <constraint firstAttribute="trailing" secondItem="mqY-Hu-cq2" secondAttribute="trailing" constant="17" id="9f0-zE-Iu7"/>
+                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="9tu-Se-aHz"/>
+                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="tHS-P1-9of" secondAttribute="bottom" constant="11" id="AJA-GH-ivC"/>
+                                        <constraint firstItem="9H2-cR-FLS" firstAttribute="leading" secondItem="wmt-BG-nFJ" secondAttribute="trailing" constant="9" id="AZ9-A1-adi"/>
+                                        <constraint firstItem="zkB-hd-3E0" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="BNj-Mb-yLU"/>
+                                        <constraint firstItem="zkB-hd-3E0" firstAttribute="top" secondItem="NrW-iE-CYC" secondAttribute="bottom" constant="6" id="CCx-wx-rbA"/>
+                                        <constraint firstItem="IqA-pS-WrM" firstAttribute="top" secondItem="LEm-hX-XwM" secondAttribute="bottom" constant="9" id="Euj-P9-MRC"/>
+                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="centerX" secondItem="MDz-II-hlD" secondAttribute="centerX" id="FYS-dD-HSt"/>
+                                        <constraint firstItem="ROu-8i-iGY" firstAttribute="leading" secondItem="wmt-BG-nFJ" secondAttribute="leading" id="FuH-8t-was"/>
+                                        <constraint firstItem="ZOS-0u-yl0" firstAttribute="top" secondItem="mqY-Hu-cq2" secondAttribute="bottom" constant="11" id="G5Y-y2-g0J"/>
+                                        <constraint firstItem="MDz-II-hlD" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="Jpf-nB-HQS"/>
+                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="3" id="Nxx-ga-ygs"/>
+                                        <constraint firstItem="vgw-nM-gcf" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="O76-xz-xiL"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Ss-zo-wJC" secondAttribute="trailing" constant="20" symbolic="YES" id="Pmc-l1-VnB"/>
+                                        <constraint firstItem="tHS-P1-9of" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MDz-II-hlD" secondAttribute="trailing" constant="11" id="QKx-yJ-qVQ"/>
+                                        <constraint firstItem="wmt-BG-nFJ" firstAttribute="top" secondItem="ROu-8i-iGY" secondAttribute="bottom" constant="9" id="QSa-Xa-aVw"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zkB-hd-3E0" secondAttribute="trailing" constant="20" symbolic="YES" id="STr-Rs-5YB"/>
+                                        <constraint firstItem="vgw-nM-gcf" firstAttribute="bottom" secondItem="pTK-W7-Axu" secondAttribute="bottom" id="Tqx-e8-WJ0"/>
+                                        <constraint firstItem="S4M-1Q-qU7" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="3" id="U6T-2x-8ud"/>
+                                        <constraint firstItem="NrW-iE-CYC" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="UpO-jS-wvK"/>
+                                        <constraint firstAttribute="bottom" secondItem="ZOS-0u-yl0" secondAttribute="bottom" constant="17" id="UvL-Jc-C2g"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ROu-8i-iGY" secondAttribute="trailing" constant="20" symbolic="YES" id="Wjc-Fo-VUR"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LEm-hX-XwM" secondAttribute="trailing" constant="20" symbolic="YES" id="ZLi-q1-laU"/>
+                                        <constraint firstAttribute="trailing" secondItem="tHS-P1-9of" secondAttribute="trailing" constant="17" id="ZNb-cf-1Ku"/>
+                                        <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="ROu-8i-iGY" secondAttribute="leading" id="ZVh-QX-wKm"/>
+                                        <constraint firstItem="9H2-cR-FLS" firstAttribute="centerY" secondItem="wmt-BG-nFJ" secondAttribute="centerY" id="abQ-cN-CWO"/>
+                                        <constraint firstItem="MDz-II-hlD" firstAttribute="top" secondItem="vgw-nM-gcf" secondAttribute="bottom" constant="12" id="axN-AQ-Xw1"/>
+                                        <constraint firstItem="0n9-sq-cZP" firstAttribute="leading" secondItem="9H2-cR-FLS" secondAttribute="leading" id="cBr-IH-gwq"/>
+                                        <constraint firstItem="9Ss-zo-wJC" firstAttribute="centerY" secondItem="ROu-8i-iGY" secondAttribute="centerY" id="dWa-9s-GmS"/>
+                                        <constraint firstItem="pTK-W7-Axu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="20" symbolic="YES" id="eg1-Mf-l7a"/>
+                                        <constraint firstItem="srg-V3-lSg" firstAttribute="leading" secondItem="9Ss-zo-wJC" secondAttribute="leading" id="emn-7P-Bzj"/>
+                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="centerY" secondItem="IqA-pS-WrM" secondAttribute="centerY" id="h8w-Rp-VEz"/>
+                                        <constraint firstItem="0n9-sq-cZP" firstAttribute="centerY" secondItem="IqA-pS-WrM" secondAttribute="centerY" id="h9C-6p-lNm"/>
+                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="0n9-sq-cZP" secondAttribute="trailing" constant="9" id="iOS-a6-o55"/>
+                                        <constraint firstAttribute="trailing" secondItem="Tk7-yc-bfj" secondAttribute="trailing" constant="17" id="jhG-Dl-DZR"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZOS-0u-yl0" secondAttribute="trailing" constant="17" id="lox-pb-oD3"/>
+                                        <constraint firstItem="tHS-P1-9of" firstAttribute="top" secondItem="wmt-BG-nFJ" secondAttribute="bottom" constant="10" id="mce-P9-HfG"/>
+                                        <constraint firstAttribute="trailing" secondItem="kHc-a7-j4S" secondAttribute="trailing" constant="17" id="nDC-6F-05m"/>
+                                        <constraint firstItem="ZOS-0u-yl0" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="rlX-Cg-Jdg"/>
+                                        <constraint firstItem="pTK-W7-Axu" firstAttribute="trailing" secondItem="MDz-II-hlD" secondAttribute="trailing" id="vr7-Uf-Yfs"/>
+                                        <constraint firstItem="kHc-a7-j4S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9H2-cR-FLS" secondAttribute="trailing" constant="9" id="weB-Xj-GTg"/>
+                                        <constraint firstItem="0n9-sq-cZP" firstAttribute="leading" secondItem="IqA-pS-WrM" secondAttribute="trailing" constant="9" id="xYv-C9-uRR"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vgw-nM-gcf" secondAttribute="trailing" constant="20" symbolic="YES" id="xbl-cg-eTu"/>
+                                        <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="kHc-a7-j4S" secondAttribute="leading" id="xcf-uk-nAq"/>
+                                        <constraint firstItem="srg-V3-lSg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S4M-1Q-qU7" secondAttribute="trailing" constant="17" id="yYS-Js-BGY"/>
+                                        <constraint firstItem="kHc-a7-j4S" firstAttribute="centerY" secondItem="wmt-BG-nFJ" secondAttribute="centerY" id="zax-YC-6Et"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Lacaille について" identifier="2" id="iDG-Ik-Bub">
                                 <view key="view" id="5Ho-dX-KKU">
-                                    <rect key="frame" x="10" y="33" width="454" height="336"/>
+                                    <rect key="frame" x="10" y="33" width="474" height="318"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8nk-D0-DUC">
-                                            <rect key="frame" x="18" y="311" width="418" height="22"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="OC7-iB-UWY"/>
-                                                <constraint firstAttribute="height" constant="22" id="rlQ-ry-YVY"/>
-                                            </constraints>
+                                            <rect key="frame" x="15" y="294" width="444" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Lacaille" id="Dh5-pl-iMx">
                                                 <font key="font" metaFont="systemBold" size="18"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -530,19 +546,18 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="di1-3l-zeP">
-                                            <rect key="frame" x="20" y="27" width="414" height="238"/>
-                                            <clipView key="contentView" drawsBackground="NO" id="2yP-00-eUE">
-                                                <rect key="frame" x="1" y="1" width="412" height="236"/>
+                                            <rect key="frame" x="17" y="27" width="440" height="226"/>
+                                            <clipView key="contentView" id="2yP-00-eUE">
+                                                <rect key="frame" x="1" y="1" width="438" height="224"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="41Y-KL-Ddr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="412" height="236"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="224"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="412" height="236"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <size key="minSize" width="438" height="224"/>
                                                         <size key="maxSize" width="463" height="10000000"/>
-                                                        <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </textView>
                                                 </subviews>
                                             </clipView>
@@ -551,12 +566,12 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="qbv-PN-LbK">
-                                                <rect key="frame" x="397" y="1" width="16" height="236"/>
+                                                <rect key="frame" x="423" y="1" width="16" height="224"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="usR-z6-aXM">
-                                            <rect key="frame" x="18" y="8" width="418" height="11"/>
+                                            <rect key="frame" x="15" y="8" width="444" height="11"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="qEr-Pd-T4P">
                                                 <font key="font" metaFont="miniSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -564,7 +579,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="25e-4C-5w6">
-                                            <rect key="frame" x="18" y="273" width="418" height="9"/>
+                                            <rect key="frame" x="15" y="261" width="444" height="9"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="spK-Er-lwY">
                                                 <font key="font" size="9" name="AquaKana"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -572,18 +587,18 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRC-ZG-Chy">
-                                            <rect key="frame" x="20" y="290" width="414" height="13"/>
+                                            <rect key="frame" x="17" y="276" width="440" height="12"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="qXt-YG-gDC">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="13"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="440" height="12"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <textView editable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="qb6-FT-ZU2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="13"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="440" height="14"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="414" height="13"/>
-                                                        <size key="maxSize" width="414" height="13"/>
+                                                        <size key="minSize" width="440" height="12"/>
+                                                        <size key="maxSize" width="440" height="42"/>
                                                         <attributedString key="textStorage">
                                                             <fragment content="http://lacaille.jpn.org/">
                                                                 <attributes>
@@ -601,7 +616,7 @@
                                                 </subviews>
                                             </clipView>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="13" id="qM8-O3-fWL"/>
+                                                <constraint firstAttribute="height" constant="12" id="x82-dP-gPF"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="TYW-5X-FXv">
                                                 <rect key="frame" x="-100" y="-100" width="87" height="18"/>
@@ -614,25 +629,22 @@
                                         </scrollView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="xRC-ZG-Chy" secondAttribute="trailing" constant="20" id="3zt-Ze-GX9"/>
-                                        <constraint firstItem="xRC-ZG-Chy" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="20" id="Dib-Yc-j9S"/>
-                                        <constraint firstItem="8nk-D0-DUC" firstAttribute="top" relation="lessThanOrEqual" secondItem="5Ho-dX-KKU" secondAttribute="top" constant="3" id="Dnr-Oj-Mq4"/>
-                                        <constraint firstItem="usR-z6-aXM" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="20" id="G1H-fG-aTg"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8nk-D0-DUC" secondAttribute="trailing" constant="20" symbolic="YES" id="GIp-CR-JTj"/>
-                                        <constraint firstAttribute="trailing" secondItem="8nk-D0-DUC" secondAttribute="trailing" constant="20" symbolic="YES" id="PSf-ZM-rhP"/>
-                                        <constraint firstItem="8nk-D0-DUC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5Ho-dX-KKU" secondAttribute="top" constant="3" id="SuV-64-PoM"/>
-                                        <constraint firstItem="25e-4C-5w6" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="20" id="Unp-ix-asg"/>
-                                        <constraint firstItem="xRC-ZG-Chy" firstAttribute="top" secondItem="8nk-D0-DUC" secondAttribute="bottom" constant="8" id="VxC-jg-bwF"/>
-                                        <constraint firstAttribute="bottom" secondItem="usR-z6-aXM" secondAttribute="bottom" constant="8" id="dk3-MK-vsa"/>
-                                        <constraint firstItem="8nk-D0-DUC" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="20" symbolic="YES" id="eg6-GF-3xP"/>
-                                        <constraint firstItem="8nk-D0-DUC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="20" symbolic="YES" id="fKv-Io-JdN"/>
-                                        <constraint firstItem="usR-z6-aXM" firstAttribute="top" secondItem="di1-3l-zeP" secondAttribute="bottom" constant="8" id="hh9-2D-999"/>
-                                        <constraint firstItem="25e-4C-5w6" firstAttribute="top" secondItem="xRC-ZG-Chy" secondAttribute="bottom" constant="8" id="kAN-sg-rKy"/>
-                                        <constraint firstAttribute="trailing" secondItem="di1-3l-zeP" secondAttribute="trailing" constant="20" symbolic="YES" id="l11-pd-ha0"/>
-                                        <constraint firstAttribute="trailing" secondItem="usR-z6-aXM" secondAttribute="trailing" constant="20" id="pSb-c3-Aw0"/>
-                                        <constraint firstItem="di1-3l-zeP" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="20" symbolic="YES" id="qxJ-l3-JGp"/>
-                                        <constraint firstAttribute="trailing" secondItem="25e-4C-5w6" secondAttribute="trailing" constant="20" id="sQw-vU-ysd"/>
-                                        <constraint firstItem="di1-3l-zeP" firstAttribute="top" secondItem="25e-4C-5w6" secondAttribute="bottom" constant="8" id="whu-T5-MSc"/>
+                                        <constraint firstItem="8nk-D0-DUC" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="17" id="21b-iG-PJM"/>
+                                        <constraint firstAttribute="trailing" secondItem="8nk-D0-DUC" secondAttribute="trailing" constant="17" id="7Cd-30-TF1"/>
+                                        <constraint firstAttribute="bottom" secondItem="usR-z6-aXM" secondAttribute="bottom" constant="8" id="KDe-vu-W9F"/>
+                                        <constraint firstItem="usR-z6-aXM" firstAttribute="top" secondItem="di1-3l-zeP" secondAttribute="bottom" constant="8" id="MWy-He-odk"/>
+                                        <constraint firstItem="25e-4C-5w6" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="17" id="TV6-MH-gzL"/>
+                                        <constraint firstAttribute="trailing" secondItem="usR-z6-aXM" secondAttribute="trailing" constant="17" id="TtW-f4-QBz"/>
+                                        <constraint firstItem="xRC-ZG-Chy" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="17" id="VkN-iU-b29"/>
+                                        <constraint firstAttribute="trailing" secondItem="xRC-ZG-Chy" secondAttribute="trailing" constant="17" id="YKM-5Y-ccQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="25e-4C-5w6" secondAttribute="trailing" constant="17" id="bLo-7P-8y9"/>
+                                        <constraint firstItem="usR-z6-aXM" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="17" id="eMA-4z-uy6"/>
+                                        <constraint firstAttribute="trailing" secondItem="di1-3l-zeP" secondAttribute="trailing" constant="17" id="eYA-Lg-a0i"/>
+                                        <constraint firstItem="xRC-ZG-Chy" firstAttribute="top" secondItem="8nk-D0-DUC" secondAttribute="bottom" constant="6" id="fcq-EA-uvk"/>
+                                        <constraint firstItem="25e-4C-5w6" firstAttribute="top" secondItem="xRC-ZG-Chy" secondAttribute="bottom" constant="6" id="jif-OL-787"/>
+                                        <constraint firstItem="di1-3l-zeP" firstAttribute="top" secondItem="25e-4C-5w6" secondAttribute="bottom" constant="8" id="p1G-VA-ilc"/>
+                                        <constraint firstItem="8nk-D0-DUC" firstAttribute="top" secondItem="5Ho-dX-KKU" secondAttribute="top" constant="3" id="r6e-BH-WHN"/>
+                                        <constraint firstItem="di1-3l-zeP" firstAttribute="leading" secondItem="5Ho-dX-KKU" secondAttribute="leading" constant="17" id="zn0-he-YzR"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -640,25 +652,30 @@
                     </tabView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="BnT-Fb-k7X" secondAttribute="trailing" constant="20" id="EbE-aQ-I4e"/>
-                    <constraint firstItem="BnT-Fb-k7X" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="20" id="Gv2-Du-x8H"/>
-                    <constraint firstAttribute="bottom" secondItem="BnT-Fb-k7X" secondAttribute="bottom" constant="20" id="Ijl-R5-cei"/>
-                    <constraint firstItem="BnT-Fb-k7X" firstAttribute="top" secondItem="372" secondAttribute="top" constant="12" id="oWi-a6-SjY"/>
+                    <constraint firstItem="BnT-Fb-k7X" firstAttribute="top" secondItem="372" secondAttribute="top" constant="12" symbolic="YES" id="SLg-NI-lke"/>
+                    <constraint firstItem="BnT-Fb-k7X" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="20" symbolic="YES" id="dsT-r7-uP1"/>
+                    <constraint firstAttribute="trailing" secondItem="BnT-Fb-k7X" secondAttribute="trailing" constant="20" symbolic="YES" id="im9-VZ-MKM"/>
+                    <constraint firstAttribute="bottom" secondItem="BnT-Fb-k7X" secondAttribute="bottom" constant="20" symbolic="YES" id="xkf-Ap-MSN"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="139" y="-150"/>
+            <point key="canvasLocation" x="212" y="-128"/>
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>
                 <outlet property="aboutBox" destination="41Y-KL-Ddr" id="WT0-0R-dSj"/>
                 <outlet property="copyrightBox" destination="usR-z6-aXM" id="Ha2-pz-rvj"/>
+                <outlet property="firstIgnoranceRadioButtonForSingleThumbL" destination="0n9-sq-cZP" id="ENm-LS-7xg"/>
+                <outlet property="firstIgnoranceRadioButtonForSingleThumbR" destination="9H2-cR-FLS" id="6LS-La-FMK"/>
                 <outlet property="keyLabel1" destination="4OU-3N-1M4" id="zPd-s0-Jum"/>
                 <outlet property="keyLabel2" destination="Azx-E6-jcJ" id="ACb-qM-19t"/>
                 <outlet property="keySheet" destination="3kW-FG-rI1" id="Qty-SF-uAg"/>
-                <outlet property="multiPurposeOutput" destination="kk5-XA-4zx" id="kpc-zl-LTB"/>
+                <outlet property="normalRadioButtonForSingleThumbL" destination="IqA-pS-WrM" id="QHV-z2-FU2"/>
+                <outlet property="normalRadioButtonForSingleThumbR" destination="wmt-BG-nFJ" id="GNH-3v-QrS"/>
                 <outlet property="oyaLabel" destination="v0n-7A-Hr6" id="Tpx-92-vQ5"/>
                 <outlet property="oyaSheet" destination="ec7-QM-BOY" id="kC1-ZJ-BsL"/>
+                <outlet property="returnemuRadioButtonForSingleThumbL" destination="Tk7-yc-bfj" id="qTV-HJ-2Qf"/>
                 <outlet property="sbMenu" destination="NEv-ui-E3r" id="XSQ-IE-RJR"/>
+                <outlet property="spaceemuRadioButtonForSingleThumbR" destination="kHc-a7-j4S" id="TGD-vJ-gvg"/>
                 <outlet property="tabView" destination="BnT-Fb-k7X" id="Oja-Yn-GvB"/>
                 <outlet property="tableView" destination="0s6-2t-FnH" id="1qB-1F-6bv"/>
                 <outlet property="versionBox" destination="25e-4C-5w6" id="TtM-61-P30"/>

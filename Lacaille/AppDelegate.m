@@ -3,7 +3,7 @@
 //  Lacaille
 //
 //  Created by kkadowaki on 2014.04.26.
-//  Copyright (c) 2014-2016 kkadowaki. All rights reserved.
+//  Copyright (c) 2014-2018 kkadowaki. All rights reserved.
 //
 //  This program is free software; you can redistribute it and/or
 //  modify it under the terms of the GNU General Public License
@@ -40,16 +40,19 @@ NSImage *imgDisabled;
 
 BOOL oyaSheetIsActive;
 BOOL keySheetIsActive;
-BOOL gKanaMethod;
+BOOL volatile gKanaMethod;
 unsigned char gBuff;
 unsigned char gOya;
 unsigned char gPrevOya;
+unsigned char gPressedOya;
+int64_t gKeyDownAutorepeat;
 CGEventFlags gEventMasks = 0;
 NSDate *gOyaKeyDownTimeStamp;
 CGEventSourceKeyboardType gKeyboardType;
 pid_t gTargetPid;
 NSMutableData *gKeySheetValue;
 int gKeySheetValueLength;   // N.B. 10.9 or lower does not support NSMutableData.length
+unsigned char gFirstIgnoredSingleThumbMask = 0;    // 親指キーの初回単独打鍵を無視するためのマスク
 
 NSFileHandle *debugOutFile = nil;
 #define debugOut(...) \
@@ -71,6 +74,8 @@ BOOL prefEnabled = NO;              // NICOLA エミュレーション
 BOOL prefCshift = NO;               // 連続シフトキー
 BOOL prefReturnemu = NO;            // 無変換キーのエミュレーション
 BOOL prefSpaceemu = NO;             // 変換キーのエミュレーション
+BOOL prefFirstIgnoredSingleThumbL = NO;     // 左親指キーの初回単独打鍵は無視
+BOOL prefFirstIgnoredSingleThumbR = NO;     // 右親指キーの初回単独打鍵は無視
 CGKeyCode prefThumbL = kVK_JIS_Eisu;    // 親指左 = 英数
 CGKeyCode prefThumbR = kVK_JIS_Kana;    // 親指右 = かな
 NSTimeInterval prefTwait = 0.06;    // 同時判定時間
@@ -214,6 +219,7 @@ int japaneseCharacterCount = 0;
         [ud synchronize];
     }
     [self updateSbIcon];
+    gPressedOya = 0;
 }
 
 @synthesize propCshift;
@@ -226,6 +232,53 @@ int japaneseCharacterCount = 0;
     prefCshift = value;
 }
 
+static NSCellStateValue getRadioButtonState(BOOL value) {
+    // N.B. 10.10 and above: NSControlStateValue, NSControlStateValueOn, NSControlStateValueOff
+    return value ? NSOnState : NSOffState;
+}
+
+- (void)updateRadioButtonsForSingleThumbL {
+    _normalRadioButtonForSingleThumbL.state = getRadioButtonState(!prefFirstIgnoredSingleThumbL && !prefReturnemu);
+    _firstIgnoranceRadioButtonForSingleThumbL.state = getRadioButtonState(prefFirstIgnoredSingleThumbL);
+    _returnemuRadioButtonForSingleThumbL.state = getRadioButtonState(prefReturnemu);
+}
+
+- (void)updateRadioButtonsForSingleThumbR {
+    _normalRadioButtonForSingleThumbR.state = getRadioButtonState(!prefFirstIgnoredSingleThumbR && !prefSpaceemu);
+    _firstIgnoranceRadioButtonForSingleThumbR.state = getRadioButtonState(prefFirstIgnoredSingleThumbR);
+    _spaceemuRadioButtonForSingleThumbR.state = getRadioButtonState(prefSpaceemu);
+}
+
+- (void)updateFirstIgnoredSingleThumbMask {
+    gFirstIgnoredSingleThumbMask = (prefFirstIgnoredSingleThumbL ? 1 : 0) | (prefFirstIgnoredSingleThumbR ? 2 : 0);
+    gPressedOya &= gFirstIgnoredSingleThumbMask;
+}
+
+@synthesize propFirstIgnoredSingleThumbL;
+- (BOOL)propFirstIgnoredSingleThumbL { return prefFirstIgnoredSingleThumbL; }
+- (void)setPropFirstIgnoredSingleThumbL:(BOOL)value {
+    if (value != prefFirstIgnoredSingleThumbL) {
+        [ud setObject:(value ? @(1) : @(0)) forKey:@"firstIgnoredSingleThumbL"];
+        [ud synchronize];
+    }
+    
+    prefFirstIgnoredSingleThumbL = value;
+    [self updateFirstIgnoredSingleThumbMask];
+    [self updateRadioButtonsForSingleThumbL];
+}
+
+@synthesize propFirstIgnoredSingleThumbR;
+- (BOOL)propFirstIgnoredSingleThumbR { return prefFirstIgnoredSingleThumbR; }
+- (void)setPropFirstIgnoredSingleThumbR:(BOOL)value {
+    if (value != prefFirstIgnoredSingleThumbR) {
+        [ud setObject:(value ? @(1) : @(0)) forKey:@"firstIgnoredSingleThumbR"];
+        [ud synchronize];
+    }
+    prefFirstIgnoredSingleThumbR = value;
+    [self updateFirstIgnoredSingleThumbMask];
+    [self updateRadioButtonsForSingleThumbR];
+}
+
 @synthesize propReturnemu;
 - (BOOL)propReturnemu { return prefReturnemu; }
 - (void)setPropReturnemu:(BOOL)value {
@@ -234,6 +287,7 @@ int japaneseCharacterCount = 0;
         [ud synchronize];
     }
     prefReturnemu = value;
+    [self updateRadioButtonsForSingleThumbL];
 }
 
 @synthesize propSpaceemu;
@@ -244,6 +298,7 @@ int japaneseCharacterCount = 0;
         [ud synchronize];
     }
     prefSpaceemu = value;
+    [self updateRadioButtonsForSingleThumbR];
 }
 
 @synthesize propThumbL;
@@ -513,8 +568,15 @@ static int getOyaByIdentifier(NSString *identifier) {
     if ((value = [udict objectForKey:@"returnemu"]) != nil) {
         self.propReturnemu = [value intValue] ? YES : NO;
     }
+    if (!self.propReturnemu && (value = [udict objectForKey:@"firstIgnoredSingleThumbL"]) != nil) {
+        self.propFirstIgnoredSingleThumbL = [value intValue] ? YES : NO;
+    }
+    
     if ((value = [udict objectForKey:@"spaceemu"]) != nil) {
         self.propSpaceemu = [value intValue] ? YES : NO;
+    }
+    if (!self.propSpaceemu && (value = [udict objectForKey:@"firstIgnoredSingleThumbR"]) != nil) {
+        self.propFirstIgnoredSingleThumbR = [value intValue] ? YES : NO;
     }
     
     if ((value = [udict objectForKey:@"thumbL"]) != nil) {
@@ -754,6 +816,21 @@ static NSData *convTraditionalKeyData(NSData *in) {
 
     [self refreshCount:sender];
 }
+
+- (IBAction)radioSingleThumbL:(id)sender {
+    NSInteger tag = [sender tag];
+    
+    [self setPropFirstIgnoredSingleThumbL:(tag == 1)];
+    [self setPropReturnemu:(tag == 2)];
+}
+
+- (IBAction)radioSingleThumbR:(id)sender {
+    NSInteger tag = [sender tag];
+    
+    [self setPropFirstIgnoredSingleThumbR:(tag == 1)];
+    [self setPropSpaceemu:(tag == 2)];
+}
+
 - (IBAction)showAboutBox:(id)sender {
     // [NSApp orderFrontStandardAboutPanel:sender];
     [self showPreferences:nil];
@@ -847,6 +924,7 @@ static NSData *convTraditionalKeyData(NSData *in) {
     gOya = 0;
     gOyaKeyDownTimeStamp = [NSDate date];
     gPrevOya = 0;
+    gPressedOya = 0;
     
     CGEventRef tmp_event = CGEventCreateKeyboardEvent(NULL, 0, YES);
     CGEventSourceRef tmp_source = CGEventCreateSourceFromEvent(tmp_event);
@@ -981,7 +1059,9 @@ void myCGEventPostToPid(pid_t pid, CGEventRef event) {
     }
     CFRetain(event);
     
-    debugOut(@"[Post] Type=%d Keycode=%d\n", CGEventGetType(event), (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode));
+    debugOut(@"[Post] Type=%d Keycode=%d, Flags=<%llx>, Pid=%d\n",
+             CGEventGetType(event), (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode),
+             (CGEventFlags)CGEventGetFlags(event), pid);
     if (CGEventPostToPid != NULL) {
         // 10.11 or higher
         CGEventPostToPid(pid, event);
@@ -1014,7 +1094,11 @@ static inline CGEventFlags myCGEventGetFlags(CGEventRef event) {
 }
 
 static inline CGEventRef returnPt(CGEventRef event, CGEventSourceRef source) {
-    debugOut(@"[RetP] Type=%d Keycode=%d\n", CGEventGetType(event), (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode));
+    debugOut(@"[RetP] Type=%d Keycode=%d, Flags=<%llx>, Pid=%d\n",
+             CGEventGetType(event), (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode),
+             (CGEventFlags)CGEventGetFlags(event),
+             (pid_t)CGEventGetIntegerValueField(event, kCGEventTargetUnixProcessID));
+    gPressedOya = 0;
     fireTimer();
     if(source != NULL) {
         CFRelease(source);
@@ -1027,6 +1111,17 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
     // see http://lists.apple.com/archives/quartz-dev/2009/Sep/msg00006.html
     if (type == kCGEventTapDisabledByTimeout || type == kCGEventTapDisabledByUserInput) {
         if (eventTap) CGEventTapEnable(eventTap, true);
+        return event;
+    }
+    
+    // Pass through
+    if ((CGEventFlags)CGEventGetFlags(event) & 0x20000000 ||
+        (pid_t)CGEventGetIntegerValueField(event, kCGEventSourceUnixProcessID) == getpid()) {
+        debugOut(@"[PT] Keycode=%d, Flags=<%llx>, Type=%d, targetPid=%d\n",
+                 (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode),
+                 (CGEventFlags)CGEventGetFlags(event), type,
+                 (pid_t)CGEventGetIntegerValueField(event, kCGEventTargetUnixProcessID)
+                 );
         return event;
     }
     
@@ -1046,6 +1141,8 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
             type = ((CGEventFlags)CGEventGetFlags(event) & masksForThisKey) ? kCGEventKeyDown : kCGEventKeyUp;
             if (type == kCGEventKeyUp) {
                 gEventMasks &= ~masksForThisKey;
+            } else {
+                gPressedOya = 0;
             }
             if (keycode == prefThumbL || keycode == prefThumbR || (oyaSheetIsActive && (pid_t)CGEventGetIntegerValueField(event, kCGEventTargetUnixProcessID) == getpid())) {
                 if (type == kCGEventKeyDown && gKanaMethod) {
@@ -1081,24 +1178,15 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
         }
     }
     
-    // Pass through
-    if ((CGEventFlags)CGEventGetFlags(event) & 0x20000000 ||
-        (pid_t)CGEventGetIntegerValueField(event, kCGEventSourceUnixProcessID) == getpid()) {
-        debugOut(@"[PT] Keycode=%d, Flags=<%llx>, Type=%d\n",
-                 (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode), (CGEventFlags)CGEventGetFlags(event), type);
-        return event;
-    }
-    
     // Event source
     CGEventSourceRef source = CGEventCreateSourceFromEvent(event);
     if (source != NULL) {
         gKeyboardType = CGEventSourceGetKeyboardType(source);
     }
-    gTargetPid = (pid_t)CGEventGetIntegerValueField(event, kCGEventTargetUnixProcessID);
-    pid_t targetPid = gTargetPid;
+    pid_t targetPid = (pid_t)CGEventGetIntegerValueField(event, kCGEventTargetUnixProcessID);
     
-    debugOut(@"[EV] Keycode=%d, Flags=<%llx>, Type=%d, gTargetPid=%d\n",
-             (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode), (CGEventFlags)CGEventGetFlags(event), type, gTargetPid);
+    debugOut(@"[EV] Keycode=%d, Flags=<%llx>, Type=%d, targetPid=%d, gTargetPid=%d\n",
+             (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode), (CGEventFlags)CGEventGetFlags(event), type, targetPid, gTargetPid);
     
     bool isCtrlH = (
         CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode) == 4 &&
@@ -1114,9 +1202,15 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
     
     CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
     
+    if (type == kCGEventKeyDown) {
+        gKeyDownAutorepeat = CGEventGetIntegerValueField(event, kCGKeyboardEventAutorepeat);
+    }
+    
     // 同時判定時間を過ぎていたら親指キーを戻す
     if (!prefCshift && (gBuff == prefThumbL || gBuff == prefThumbR) &&
         [[NSDate date] timeIntervalSinceDate:gOyaKeyDownTimeStamp] > prefTwait) {
+        unsigned char prevBuff = gBuff;
+        CGEventFlags prevEventMasks = gEventMasks;
         switch(gBuff) {
             case kVK_Option: case kVK_RightOption:      gEventMasks &= ~kCGEventFlagMaskAlternate;    break;
             case kVK_Command: case kVK_RightCommand:    gEventMasks &= ~kCGEventFlagMaskCommand;      break;
@@ -1126,7 +1220,15 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
         }
         startTimer(0);
         fireTimer();
+        
+        // 親指が修飾キーなら親指キーではなく修飾キーとしてもう一度押す
+        if (prevEventMasks != gEventMasks) {
+            myCGEventPostToPid(targetPid, CGEventCreateKeyboardEvent(source, prevBuff, YES));
+            // yield しないと順序が逆になる
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05f]];
+        }
     }
+    gTargetPid = targetPid;
     
     // remove thumb keys from event flags
     CGEventSetFlags(event, myCGEventGetFlags(event));
@@ -1331,6 +1433,12 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
                 // 親指キーが離されたら、キーを押された時間に遡ってタイマーをスタート
                 startTimer([[NSDate date] timeIntervalSinceDate:gOyaKeyDownTimeStamp]);
                 
+            } else if (gOya == 0 && (keycode == prefThumbL || keycode == prefThumbR)) {
+                // 10.13 の Dock では、Command + Tab の後の Command キーを returnPt で戻さないといけない
+                unsigned char key = keycode;
+                if (key == kVK_Option || key == kVK_Command || key == kVK_Shift || key == kVK_CapsLock || key == kVK_Control || key == kVK_RightOption || key == kVK_RightCommand || key == kVK_RightShift || key == kVK_RightControl) {
+                    return returnPt(event, source);
+                }
             }
         }
         if(source != NULL) {
@@ -1432,16 +1540,24 @@ static void pressKeys(CGEventSourceRef source, pid_t targetPid, NSData *newkey, 
     pid_t targetPid = gTargetPid;
     
     if (keycode == prefThumbL || keycode == prefThumbR) {
+        unsigned char oya = (keycode == prefThumbL) ? 1 : 2;
+        
         if (prefReturnemu && keycode == prefThumbL) {
             keycode = (CGKeyCode)kVK_Return;
         } else if (prefSpaceemu && keycode == prefThumbR) {
             keycode = (CGKeyCode)kVK_Space;
         }
         
-        myCGEventPostToPid(targetPid, CGEventCreateKeyboardEvent(source, keycode, YES));
-        myCGEventPostToPid(targetPid, CGEventCreateKeyboardEvent(source, keycode, NO));
+        if ((oya & gFirstIgnoredSingleThumbMask) == 0 || (gPressedOya == oya && !gKeyDownAutorepeat)) {
+            gPressedOya = 0;
+            myCGEventPostToPid(targetPid, CGEventCreateKeyboardEvent(source, keycode, YES));
+            myCGEventPostToPid(targetPid, CGEventCreateKeyboardEvent(source, keycode, NO));
+        } else {
+            gPressedOya = oya & gFirstIgnoredSingleThumbMask;
+        }
         
     } else if (keycode != 0xff) {
+        gPressedOya = 0;
         NSData *newkey = getKeyDataForOya(keycode, gOya);
         debugOut(@"[OYA] Keycode=%d, gOya=%d, newKey=%@\n", keycode, gOya, newkey);
         pressKeys(source, targetPid, newkey, (CGEventFlags)0);

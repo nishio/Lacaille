@@ -10,6 +10,10 @@
 	<integer>0</integer>
 	<key>escemu</key>
 	<integer>1</integer>
+	<key>firstIgnoredSingleThumbL</key>
+	<integer>0</integer>
+	<key>firstIgnoredSingleThumbR</key>
+	<integer>0</integer>
 	<key>koyubi</key>
 	<integer>0</integer>
 	<key>layout</key>
