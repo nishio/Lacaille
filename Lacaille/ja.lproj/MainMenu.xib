@@ -120,24 +120,24 @@
         </menu>
         <window title="Lacaille" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <rect key="contentRect" x="335" y="390" width="520" height="380"/>
+            <rect key="contentRect" x="335" y="390" width="520" height="521"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
             <value key="minSize" type="size" width="500" height="360"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="520" height="380"/>
+                <rect key="frame" x="0.0" y="0.0" width="520" height="521"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <tabView translatesAutoresizingMaskIntoConstraints="NO" id="BnT-Fb-k7X">
-                        <rect key="frame" x="13" y="10" width="494" height="364"/>
+                        <rect key="frame" x="13" y="10" width="494" height="505"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="環境設定" identifier="1" id="Wmj-OY-gRO">
                                 <view key="view" id="Fw2-XY-iL0">
-                                    <rect key="frame" x="10" y="33" width="474" height="318"/>
+                                    <rect key="frame" x="10" y="33" width="474" height="459"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button toolTip="“ユーザとグループ”システム環境設定の“ログイン項目”に Lacaille を追加します" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-1Q-qU7">
-                                            <rect key="frame" x="15" y="299" width="183" height="18"/>
+                                            <rect key="frame" x="15" y="440" width="183" height="18"/>
                                             <buttonCell key="cell" type="check" title="ログイン時に Lacaille を起動" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="wza-WG-rFv">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -147,7 +147,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="Lacaille の動作を有効にします" translatesAutoresizingMaskIntoConstraints="NO" id="NrW-iE-CYC">
-                                            <rect key="frame" x="15" y="279" width="170" height="18"/>
+                                            <rect key="frame" x="15" y="420" width="170" height="18"/>
                                             <buttonCell key="cell" type="check" title="NICOLA エミュレーション" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="w41-ai-WUB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -161,7 +161,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="親指キーを押し続けていれば、2キー目以降も同時打鍵とみなします（主に飛鳥カナ配列で使用します）" translatesAutoresizingMaskIntoConstraints="NO" id="zkB-hd-3E0">
-                                            <rect key="frame" x="15" y="259" width="107" height="18"/>
+                                            <rect key="frame" x="15" y="400" width="107" height="18"/>
                                             <buttonCell key="cell" type="check" title="連続シフトキー" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="1TA-wF-EZ2">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -171,7 +171,7 @@
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vgw-nM-gcf">
-                                            <rect key="frame" x="15" y="215" width="77" height="16"/>
+                                            <rect key="frame" x="15" y="356" width="77" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="同時判定時間" id="pNT-1y-1tl">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -179,7 +179,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pTK-W7-Axu">
-                                            <rect key="frame" x="170" y="215" width="28" height="11"/>
+                                            <rect key="frame" x="170" y="356" width="28" height="11"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="Pqg-qk-rMx">
                                                 <font key="font" metaFont="miniSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -194,14 +194,14 @@
                                             </connections>
                                         </textField>
                                         <slider toolTip="同時打鍵判定時間を 0 ms から 200 ms の間で設定します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MDz-II-hlD">
-                                            <rect key="frame" x="15" y="179" width="183" height="24"/>
+                                            <rect key="frame" x="15" y="327" width="183" height="24"/>
                                             <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="200" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="41" allowsTickMarkValuesOnly="YES" sliderType="linear" id="gq6-g7-ffz"/>
                                             <connections>
                                                 <binding destination="494" name="value" keyPath="self.propTwait" id="2BL-oa-V54"/>
                                             </connections>
                                         </slider>
                                         <textField id="JjT-nw-IsD">
-                                            <rect key="frame" x="-2" y="0.0" width="4" height="0.0"/>
+                                            <rect key="frame" x="-2" y="141" width="4" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指左" id="bwf-bN-dBB">
                                                 <font key="font" metaFont="system"/>
@@ -210,7 +210,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="親指左キーとして使用するキーを選択します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LEm-hX-XwM">
-                                            <rect key="frame" x="265" y="287" width="100" height="32"/>
+                                            <rect key="frame" x="265" y="428" width="100" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="U56-Sj-QHg"/>
                                             </constraints>
@@ -228,7 +228,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="左親指キーを単独打鍵した際に、割り当てたキーを打鍵したとみなします" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IqA-pS-WrM">
-                                            <rect key="frame" x="270" y="268" width="47" height="18"/>
+                                            <rect key="frame" x="270" y="409" width="47" height="18"/>
                                             <buttonCell key="cell" type="radio" title="通常" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Vsp-5t-V8J">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -238,7 +238,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="左親指キーを2回連続で打鍵した際に、割り当てたキーを打鍵したとみなします" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="0n9-sq-cZP">
-                                            <rect key="frame" x="323" y="268" width="71" height="18"/>
+                                            <rect key="frame" x="323" y="409" width="71" height="18"/>
                                             <buttonCell key="cell" type="radio" title="初回無効" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0he-6R-xHt">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -248,7 +248,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="左親指キーの単独打鍵を return キーとして使用します" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Tk7-yc-bfj">
-                                            <rect key="frame" x="400" y="268" width="59" height="18"/>
+                                            <rect key="frame" x="400" y="409" width="59" height="18"/>
                                             <buttonCell key="cell" type="radio" title="無変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="q0U-sY-qqf">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -258,7 +258,7 @@
                                             </connections>
                                         </button>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Ss-zo-wJC">
-                                            <rect key="frame" x="223" y="242" width="41" height="16"/>
+                                            <rect key="frame" x="223" y="383" width="41" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指右" id="BJ0-zd-ODz">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -266,7 +266,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <button toolTip="親指右キーとして使用するキーを選択します" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ROu-8i-iGY">
-                                            <rect key="frame" x="265" y="232" width="100" height="32"/>
+                                            <rect key="frame" x="265" y="373" width="100" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="QBN-PK-pus"/>
                                             </constraints>
@@ -284,7 +284,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="右親指キーを単独打鍵した際に、割り当てたキーを打鍵したとみなします" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmt-BG-nFJ">
-                                            <rect key="frame" x="270" y="213" width="47" height="18"/>
+                                            <rect key="frame" x="270" y="354" width="47" height="18"/>
                                             <buttonCell key="cell" type="radio" title="通常" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="TaQ-24-eXE">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -294,7 +294,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="右親指キーを2回連続で打鍵した際に、割り当てたキーを打鍵したとみなします" horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="9H2-cR-FLS">
-                                            <rect key="frame" x="323" y="213" width="71" height="18"/>
+                                            <rect key="frame" x="323" y="354" width="71" height="18"/>
                                             <buttonCell key="cell" type="radio" title="初回無効" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="33n-eb-9U8">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -304,7 +304,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="右親指キーの単独打鍵をスペースバーとして使用します" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="kHc-a7-j4S">
-                                            <rect key="frame" x="400" y="213" width="59" height="18"/>
+                                            <rect key="frame" x="400" y="354" width="59" height="18"/>
                                             <buttonCell key="cell" type="radio" title="変換" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xgm-0Q-hFB">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -314,7 +314,7 @@
                                             </connections>
                                         </button>
                                         <button toolTip="Lacaille の設定ファイルや TESLA野良ビルド用のキー配列定義ファイルを読み込みます" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tHS-P1-9of">
-                                            <rect key="frame" x="280" y="176" width="183" height="32"/>
+                                            <rect key="frame" x="280" y="317" width="183" height="32"/>
                                             <buttonCell key="cell" type="push" title="設定ファイルの読み込み…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="IaL-6E-Hor">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -324,16 +324,16 @@
                                             </connections>
                                         </button>
                                         <box horizontalHuggingPriority="249" verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-Hu-cq2">
-                                            <rect key="frame" x="17" y="169" width="440" height="5"/>
+                                            <rect key="frame" x="17" y="244" width="440" height="5"/>
                                         </box>
-                                        <scrollView focusRingType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOS-0u-yl0">
-                                            <rect key="frame" x="17" y="17" width="440" height="143"/>
+                                        <scrollView focusRingType="none" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOS-0u-yl0">
+                                            <rect key="frame" x="17" y="17" width="440" height="214"/>
                                             <clipView key="contentView" focusRingType="none" id="Oms-pL-PyO">
-                                                <rect key="frame" x="1" y="0.0" width="438" height="142"/>
+                                                <rect key="frame" x="1" y="0.0" width="438" height="213"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" selectionHighlightStyle="none" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="eit-sR-rpY" viewBased="YES" id="0s6-2t-FnH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="119"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="190"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -465,11 +465,42 @@
                                             </tableHeaderView>
                                         </scrollView>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="srg-V3-lSg">
-                                            <rect key="frame" x="223" y="297" width="41" height="16"/>
+                                            <rect key="frame" x="223" y="438" width="41" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="親指左" id="bwf-bN-dBA">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nhp-hy-gtT">
+                                            <rect key="frame" x="378" y="286" width="65" height="32"/>
+                                            <buttonCell key="cell" type="push" title="更新" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1cN-K5-u5w">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="13" name=".HiraKakuInterface-W3"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="refreshCount:" target="494" id="XOA-Sv-kba"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BiU-6T-25U">
+                                            <rect key="frame" x="378" y="260" width="89" height="32"/>
+                                            <buttonCell key="cell" type="push" title="リセット" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zBO-At-ZhS">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="13" name=".HiraKakuInterface-W3"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="resetCount:" target="494" id="z2K-OY-vpp"/>
+                                            </connections>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ze1-Z6-GIy">
+                                            <rect key="frame" x="17" y="267" width="363" height="47"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="363" id="Mzn-hH-AYr"/>
+                                            </constraints>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="pOr-9h-XL4">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
                                     </subviews>
@@ -478,22 +509,25 @@
                                         <constraint firstItem="mqY-Hu-cq2" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="3o2-fC-dlF"/>
                                         <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="srg-V3-lSg" secondAttribute="trailing" constant="9" id="43q-da-7Sw"/>
                                         <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="IqA-pS-WrM" secondAttribute="leading" id="50w-gm-Sn2"/>
+                                        <constraint firstItem="nhp-hy-gtT" firstAttribute="top" secondItem="tHS-P1-9of" secondAttribute="bottom" constant="10" id="5Sz-bs-xzC"/>
                                         <constraint firstItem="NrW-iE-CYC" firstAttribute="top" secondItem="S4M-1Q-qU7" secondAttribute="bottom" constant="6" id="6ul-87-ZUN"/>
                                         <constraint firstItem="Tk7-yc-bfj" firstAttribute="trailing" secondItem="kHc-a7-j4S" secondAttribute="trailing" id="7GD-Hc-cXI"/>
                                         <constraint firstItem="ROu-8i-iGY" firstAttribute="top" secondItem="IqA-pS-WrM" secondAttribute="bottom" constant="9" id="8Fh-FL-eeB"/>
-                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="MDz-II-hlD" secondAttribute="bottom" constant="9" id="9Da-0T-WAy"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NrW-iE-CYC" secondAttribute="trailing" constant="20" symbolic="YES" id="9Hk-8R-5Ca"/>
                                         <constraint firstAttribute="trailing" secondItem="mqY-Hu-cq2" secondAttribute="trailing" constant="17" id="9f0-zE-Iu7"/>
                                         <constraint firstItem="S4M-1Q-qU7" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="9tu-Se-aHz"/>
-                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="tHS-P1-9of" secondAttribute="bottom" constant="11" id="AJA-GH-ivC"/>
+                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="tHS-P1-9of" secondAttribute="bottom" constant="77" id="AJA-GH-ivC"/>
                                         <constraint firstItem="9H2-cR-FLS" firstAttribute="leading" secondItem="wmt-BG-nFJ" secondAttribute="trailing" constant="9" id="AZ9-A1-adi"/>
                                         <constraint firstItem="zkB-hd-3E0" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="BNj-Mb-yLU"/>
                                         <constraint firstItem="zkB-hd-3E0" firstAttribute="top" secondItem="NrW-iE-CYC" secondAttribute="bottom" constant="6" id="CCx-wx-rbA"/>
+                                        <constraint firstItem="Ze1-Z6-GIy" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="EnE-rJ-fSR"/>
                                         <constraint firstItem="IqA-pS-WrM" firstAttribute="top" secondItem="LEm-hX-XwM" secondAttribute="bottom" constant="9" id="Euj-P9-MRC"/>
                                         <constraint firstItem="S4M-1Q-qU7" firstAttribute="centerX" secondItem="MDz-II-hlD" secondAttribute="centerX" id="FYS-dD-HSt"/>
                                         <constraint firstItem="ROu-8i-iGY" firstAttribute="leading" secondItem="wmt-BG-nFJ" secondAttribute="leading" id="FuH-8t-was"/>
                                         <constraint firstItem="ZOS-0u-yl0" firstAttribute="top" secondItem="mqY-Hu-cq2" secondAttribute="bottom" constant="11" id="G5Y-y2-g0J"/>
                                         <constraint firstItem="MDz-II-hlD" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="Jpf-nB-HQS"/>
+                                        <constraint firstItem="vgw-nM-gcf" firstAttribute="top" secondItem="zkB-hd-3E0" secondAttribute="bottom" constant="30" id="JvT-aD-Bvo"/>
+                                        <constraint firstItem="BiU-6T-25U" firstAttribute="top" secondItem="nhp-hy-gtT" secondAttribute="bottom" constant="5" id="NDe-W3-V8a"/>
                                         <constraint firstItem="LEm-hX-XwM" firstAttribute="top" secondItem="Fw2-XY-iL0" secondAttribute="top" constant="3" id="Nxx-ga-ygs"/>
                                         <constraint firstItem="vgw-nM-gcf" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="O76-xz-xiL"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9Ss-zo-wJC" secondAttribute="trailing" constant="20" symbolic="YES" id="Pmc-l1-VnB"/>
@@ -509,8 +543,9 @@
                                         <constraint firstAttribute="trailing" secondItem="tHS-P1-9of" secondAttribute="trailing" constant="17" id="ZNb-cf-1Ku"/>
                                         <constraint firstItem="LEm-hX-XwM" firstAttribute="leading" secondItem="ROu-8i-iGY" secondAttribute="leading" id="ZVh-QX-wKm"/>
                                         <constraint firstItem="9H2-cR-FLS" firstAttribute="centerY" secondItem="wmt-BG-nFJ" secondAttribute="centerY" id="abQ-cN-CWO"/>
-                                        <constraint firstItem="MDz-II-hlD" firstAttribute="top" secondItem="vgw-nM-gcf" secondAttribute="bottom" constant="12" id="axN-AQ-Xw1"/>
+                                        <constraint firstItem="MDz-II-hlD" firstAttribute="top" secondItem="vgw-nM-gcf" secondAttribute="bottom" constant="5" id="axN-AQ-Xw1"/>
                                         <constraint firstItem="0n9-sq-cZP" firstAttribute="leading" secondItem="9H2-cR-FLS" secondAttribute="leading" id="cBr-IH-gwq"/>
+                                        <constraint firstItem="BiU-6T-25U" firstAttribute="leading" secondItem="Ze1-Z6-GIy" secondAttribute="trailing" constant="4" id="dS8-Sl-dOR"/>
                                         <constraint firstItem="9Ss-zo-wJC" firstAttribute="centerY" secondItem="ROu-8i-iGY" secondAttribute="centerY" id="dWa-9s-GmS"/>
                                         <constraint firstItem="pTK-W7-Axu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="20" symbolic="YES" id="eg1-Mf-l7a"/>
                                         <constraint firstItem="srg-V3-lSg" firstAttribute="leading" secondItem="9Ss-zo-wJC" secondAttribute="leading" id="emn-7P-Bzj"/>
@@ -519,14 +554,17 @@
                                         <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="0n9-sq-cZP" secondAttribute="trailing" constant="9" id="iOS-a6-o55"/>
                                         <constraint firstAttribute="trailing" secondItem="Tk7-yc-bfj" secondAttribute="trailing" constant="17" id="jhG-Dl-DZR"/>
                                         <constraint firstAttribute="trailing" secondItem="ZOS-0u-yl0" secondAttribute="trailing" constant="17" id="lox-pb-oD3"/>
+                                        <constraint firstItem="nhp-hy-gtT" firstAttribute="leading" secondItem="Ze1-Z6-GIy" secondAttribute="trailing" constant="4" id="m7W-ga-r9q"/>
                                         <constraint firstItem="tHS-P1-9of" firstAttribute="top" secondItem="wmt-BG-nFJ" secondAttribute="bottom" constant="10" id="mce-P9-HfG"/>
                                         <constraint firstAttribute="trailing" secondItem="kHc-a7-j4S" secondAttribute="trailing" constant="17" id="nDC-6F-05m"/>
                                         <constraint firstItem="ZOS-0u-yl0" firstAttribute="leading" secondItem="Fw2-XY-iL0" secondAttribute="leading" constant="17" id="rlX-Cg-Jdg"/>
                                         <constraint firstItem="pTK-W7-Axu" firstAttribute="trailing" secondItem="MDz-II-hlD" secondAttribute="trailing" id="vr7-Uf-Yfs"/>
                                         <constraint firstItem="kHc-a7-j4S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9H2-cR-FLS" secondAttribute="trailing" constant="9" id="weB-Xj-GTg"/>
+                                        <constraint firstItem="Ze1-Z6-GIy" firstAttribute="top" secondItem="nhp-hy-gtT" secondAttribute="top" id="xBb-9l-rcw"/>
                                         <constraint firstItem="0n9-sq-cZP" firstAttribute="leading" secondItem="IqA-pS-WrM" secondAttribute="trailing" constant="9" id="xYv-C9-uRR"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vgw-nM-gcf" secondAttribute="trailing" constant="20" symbolic="YES" id="xbl-cg-eTu"/>
                                         <constraint firstItem="Tk7-yc-bfj" firstAttribute="leading" secondItem="kHc-a7-j4S" secondAttribute="leading" id="xcf-uk-nAq"/>
+                                        <constraint firstItem="mqY-Hu-cq2" firstAttribute="top" secondItem="Ze1-Z6-GIy" secondAttribute="bottom" constant="20" id="xvf-aD-lLF"/>
                                         <constraint firstItem="srg-V3-lSg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="S4M-1Q-qU7" secondAttribute="trailing" constant="17" id="yYS-Js-BGY"/>
                                         <constraint firstItem="kHc-a7-j4S" firstAttribute="centerY" secondItem="wmt-BG-nFJ" secondAttribute="centerY" id="zax-YC-6Et"/>
                                     </constraints>
@@ -534,11 +572,11 @@
                             </tabViewItem>
                             <tabViewItem label="Lacaille について" identifier="2" id="iDG-Ik-Bub">
                                 <view key="view" id="5Ho-dX-KKU">
-                                    <rect key="frame" x="10" y="33" width="474" height="318"/>
+                                    <rect key="frame" x="10" y="33" width="474" height="459"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8nk-D0-DUC">
-                                            <rect key="frame" x="15" y="294" width="444" height="21"/>
+                                            <rect key="frame" x="15" y="435" width="444" height="21"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Lacaille" id="Dh5-pl-iMx">
                                                 <font key="font" metaFont="systemBold" size="18"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -546,16 +584,16 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="di1-3l-zeP">
-                                            <rect key="frame" x="17" y="27" width="440" height="226"/>
+                                            <rect key="frame" x="17" y="27" width="440" height="367"/>
                                             <clipView key="contentView" id="2yP-00-eUE">
-                                                <rect key="frame" x="1" y="1" width="438" height="224"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <rect key="frame" x="1" y="1" width="438" height="365"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="41Y-KL-Ddr">
-                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="224"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="438" height="365"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <size key="minSize" width="438" height="224"/>
+                                                        <size key="minSize" width="438" height="365"/>
                                                         <size key="maxSize" width="463" height="10000000"/>
                                                         <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </textView>
@@ -566,7 +604,7 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="qbv-PN-LbK">
-                                                <rect key="frame" x="423" y="1" width="16" height="224"/>
+                                                <rect key="frame" x="423" y="1" width="16" height="365"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                         </scrollView>
@@ -579,7 +617,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="25e-4C-5w6">
-                                            <rect key="frame" x="15" y="261" width="444" height="9"/>
+                                            <rect key="frame" x="15" y="402" width="444" height="9"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="spK-Er-lwY">
                                                 <font key="font" size="9" name="AquaKana"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -587,10 +625,10 @@
                                             </textFieldCell>
                                         </textField>
                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRC-ZG-Chy">
-                                            <rect key="frame" x="17" y="276" width="440" height="12"/>
+                                            <rect key="frame" x="17" y="417" width="440" height="12"/>
                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="qXt-YG-gDC">
                                                 <rect key="frame" x="0.0" y="0.0" width="440" height="12"/>
-                                                <autoresizingMask key="autoresizingMask"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textView editable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="qb6-FT-ZU2">
                                                         <rect key="frame" x="0.0" y="0.0" width="440" height="14"/>
@@ -658,7 +696,7 @@
                     <constraint firstAttribute="bottom" secondItem="BnT-Fb-k7X" secondAttribute="bottom" constant="20" symbolic="YES" id="xkf-Ap-MSN"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="212" y="-128"/>
+            <point key="canvasLocation" x="110" y="-156.5"/>
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>
@@ -669,6 +707,7 @@
                 <outlet property="keyLabel1" destination="4OU-3N-1M4" id="zPd-s0-Jum"/>
                 <outlet property="keyLabel2" destination="Azx-E6-jcJ" id="ACb-qM-19t"/>
                 <outlet property="keySheet" destination="3kW-FG-rI1" id="Qty-SF-uAg"/>
+                <outlet property="multiPurposeOutput" destination="Ze1-Z6-GIy" id="Rre-Mh-TmH"/>
                 <outlet property="normalRadioButtonForSingleThumbL" destination="IqA-pS-WrM" id="QHV-z2-FU2"/>
                 <outlet property="normalRadioButtonForSingleThumbR" destination="wmt-BG-nFJ" id="GNH-3v-QrS"/>
                 <outlet property="oyaLabel" destination="v0n-7A-Hr6" id="Tpx-92-vQ5"/>
