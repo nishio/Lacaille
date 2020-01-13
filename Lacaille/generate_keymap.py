@@ -194,7 +194,7 @@ ROMA = [
     'ta', 'da', 'chi', 'di', 'xtu', 'tsu', 'du', 'te', 'de', 'to', 'do', 'na', 'ni', 'nu', 'ne', 'no',
     'ha', 'ba', 'pa', 'hi', 'bi', 'pi', 'fu', 'bu', 'pu', 'he', 'be', 'pe', 'ho', 'bo', 'po',
     'ma', 'mi', 'mu', 'me', 'mo', 'xya', 'ya', 'xyu', 'yu', 'xyo', 'yo',
-    'ra', 'ri', 'ru', 're', 'ro', 'wa', 'wo', 'n',
+    'ra', 'ri', 'ru', 're', 'ro', 'wa', 'wo', 'nn',
     '/', '-', '!', '(', ')',
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     ':', '?']
