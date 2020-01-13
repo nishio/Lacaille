@@ -116,6 +116,8 @@ def strToKeyData(s):
     """
     buf = bytearray([0xFF, 0xFF, 0xFF])
     i = 0
+    if s in KANA_MAP:
+        s = KANA_MAP[s]
     for c in s:
         if c in REVERSE_SHIFT_MAP:
             c = REVERSE_SHIFT_MAP[c]
@@ -160,19 +162,51 @@ keymap_for_RSHIFT = [
     'A', 'S', 'D', 'F', 'G', '_', 'H', 'J', 'K', 'L', '+', '*',
     'Z', 'X', 'C', 'V', 'B', '$', 'N', 'M', ',', '.', '?']
 
-assert (sorted(FLAT_JIS_KEY_LAYOUT) ==
-        [0,  1,  2,  3,  4,  5,  6,  7,  8,  9,
-         11, 12, 13, 14, 15, 16, 17, 18, 19,
-         20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-         30, 31, 32, 33, 34, 35,     37, 38, 39,
-         40, 41, 42, 43, 44, 45, 46, 47, 93, 94])
+keymap_for_KANA_BASE = [
+    '１', '２', '３', '４', '５', '', '６', '７', '８', '９', '０', '', '',
+    '', 'か', 'た', 'こ', 'さ', '「', 'ら', 'ち', 'く', 'つ', 'ほ', '',
+    'う', 'し', 'て', 'け', 'せ', '」', 'は', 'と', 'き', 'い', 'ん', '：',
+    'ね', 'ひ', 'す', 'ふ', 'へ', '', 'め', 'そ', '、', '。', '・']
+keymap_for_KANA_LSHIFT = [
+    '？', '・', '〜', '', '', '', '', '', '', '', '', '', '',
+    'ぁ', 'え', 'り', 'ゃ', 'れ', '', 'ぱ', 'ぢ', 'ぐ', 'づ', 'ぼ', '',
+    'を', 'あ', 'な', 'ゅ', 'も', '', 'ば', 'ど', 'ぎ', 'ぽ', '', '',
+    'ぅ', 'ー', 'ろ', 'や', 'ぃ', '', 'ぷ', 'ぞ', 'ぺ', 'ぴ', '']
+keymap_for_KANA_RSHIFT = [
+    '！', '', '', '', '', '', '', '', '（', '）', '', '', '',
+    '', 'が', 'だ', 'ご', 'ざ', '', 'よ', 'に', 'る', 'ま', 'ぇ', '',
+    '', 'じ', 'で', 'げ', 'ぜ', '', 'み', 'お', 'の', 'ょ', 'っ', '',
+    '', 'び', 'ず', 'ぶ', 'べ', '', 'ぬ', 'ゆ', 'む', 'わ', 'ぉ']
+
+KANA = [
+    '、', '。', '「', '」', '〜', 'ぁ', 'あ', 'ぃ', 'い', 'ぅ', 'う', 'ぇ', 'え', 'ぉ', 'お',
+    'か', 'が', 'き', 'ぎ', 'く', 'ぐ', 'け', 'げ', 'こ', 'ご',
+    'さ', 'ざ', 'し', 'じ', 'す', 'ず', 'せ', 'ぜ', 'そ', 'ぞ',
+    'た', 'だ', 'ち', 'ぢ', 'っ', 'つ', 'づ', 'て', 'で', 'と', 'ど', 'な', 'に', 'ぬ', 'ね', 'の',
+    'は', 'ば', 'ぱ', 'ひ', 'び', 'ぴ', 'ふ', 'ぶ', 'ぷ', 'へ', 'べ', 'ぺ', 'ほ', 'ぼ', 'ぽ',
+    'ま', 'み', 'む', 'め', 'も', 'ゃ', 'や', 'ゅ', 'ゆ', 'ょ', 'よ',
+    'ら', 'り', 'る', 'れ', 'ろ', 'わ', 'を', 'ん',
+    '・', 'ー', '！', '（', '）', '０', '１', '２', '３', '４', '５', '６', '７', '８', '９', '：', '？']
+ROMA = [
+    ',', '.', '[', ']', '~', 'xa', 'a', 'xi', 'i', 'xu', 'u', 'xe', 'e', 'xo', 'o',
+    'ka', 'ga', 'ki', 'gi', 'ku', 'gu', 'ke', 'ge', 'ko', 'go',
+    'sa', 'za', 'shi', 'ji', 'su', 'zu', 'se', 'ze', 'so', 'zo',
+    'ta', 'da', 'chi', 'di', 'xtu', 'tsu', 'du', 'te', 'de', 'to', 'do', 'na', 'ni', 'nu', 'ne', 'no',
+    'ha', 'ba', 'pa', 'hi', 'bi', 'pi', 'fu', 'bu', 'pu', 'he', 'be', 'pe', 'ho', 'bo', 'po',
+    'ma', 'mi', 'mu', 'me', 'mo', 'xya', 'ya', 'xyu', 'yu', 'xyo', 'yo',
+    'ra', 'ri', 'ru', 're', 'ro', 'wa', 'wo', 'n',
+    '/', '-', '!', '(', ')',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+    ':', '?']
+KANA_MAP = dict(zip(KANA, ROMA))
 
 LAYOUT_KEY_COUNT = 50
 
-output = ["0xFF, 0xFF, 0xFF"] * LAYOUT_KEY_COUNT
 
+def generate_objc(keymap, name="FOO"):
+    assert len(keymap) == len(original_keymap)
 
-def generate_objc(keymap):
+    output = ["0xFF, 0xFF, 0xFF"] * LAYOUT_KEY_COUNT
     if "\\" in keymap:
         raise RuntimeError("use `¥` instead of `\\`")
     if " " in keymap:
@@ -192,12 +226,47 @@ def generate_objc(keymap):
 
         output[index] = newkey
 
-    print(", ".join(output))
+    output = ", ".join(output)
+    print(f"unsigned char keymap_{name}[] = {{{output}}};")
 
 
-generate_objc(keymap_for_LSHIFT)
+generate_objc(keymap_for_BASE, "ASCII_BASE")
 
-generate_objc(keymap_for_RSHIFT)
+generate_objc(keymap_for_LSHIFT, "ASCII_LSHIFT")
+
+generate_objc(keymap_for_RSHIFT, "ASCII_RSHIFT")
+
+generate_objc(keymap_for_KANA_BASE, "KANA_BASE")
+
+generate_objc(keymap_for_KANA_LSHIFT, "KANA_LSHIFT")
+
+generate_objc(keymap_for_KANA_RSHIFT, "KANA_RSHIFT")
+
+
+def generate_keylayout(base, lshift, rshift):
+    def get(xs, i):
+        if xs[i]:
+            return xs[i]
+        return " "
+
+    def getTri(i):
+        return get(lshift, i) + get(rshift, i) + get(base, i)
+
+    row1 = [getTri(i) for i in range(13)]
+    row2 = [getTri(i) for i in range(13, 25)]
+    row3 = [getTri(i) for i in range(25, 37)]
+    row4 = [getTri(i) for i in range(37, 48)]
+    import json
+    print(json.dumps([row1, row2, row3, row4]))
+
+
+generate_keylayout(keymap_for_BASE, keymap_for_LSHIFT, keymap_for_RSHIFT)
+
+
+def keylayout_to_keymap(keylayout):
+    print([(x + "   ")[2] for x in keylayout])
+    print([(x + "   ")[0] for x in keylayout])
+    print([(x + "   ")[1] for x in keylayout])
 
 
 def test():
