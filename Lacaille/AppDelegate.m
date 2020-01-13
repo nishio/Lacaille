@@ -80,6 +80,18 @@ CGKeyCode prefThumbL = kVK_JIS_Eisu;    // 親指左 = 英数
 CGKeyCode prefThumbR = kVK_JIS_Kana;    // 親指右 = かな
 NSTimeInterval prefTwait = 0.06;    // 同時判定時間
 
+enum {
+    KANA_NO_SHIFT,
+    KANA_L_THUMB,
+    KANA_R_THUMB,
+    KANA_OUTER_SHIFT,
+    ASCII_NO_SHIFT,
+    ASCII_OUTER_SHIFT,
+    WITH_MODIFIER,
+    ASCII_L_THUMB,
+    ASCII_R_THUMB
+};
+
 NSString *const LacailleErrorDomain = @"org.jpn.lacaille.Lacaille.LacailleErrorDomain";
 typedef NS_ENUM(NSInteger, LacailleErrorCode) {
     LacailleErrorLayoutNotLoad,
@@ -1239,7 +1251,7 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
                                     kCGEventFlagMaskSecondaryFn | kCGEventFlagMaskNumericPad)) {
         if (keycode < 0x0A || (0x0A < keycode && keycode < 0x24) || (0x24 < keycode && keycode < 0x30) || keycode == kVK_JIS_Yen || keycode == kVK_JIS_Underscore) {
             
-            NSData *newkey = getKeyDataForOya(keycode, 6);
+            NSData *newkey = getKeyDataForOya(keycode, WITH_MODIFIER);
             
             if (newkey.length == 1) {
                 // backward compatibility: 修飾キーのキー定義がデフォルト or 1文字のときは returnPt を使う
@@ -1271,9 +1283,11 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
             
             NSData *newkey;
             if (myCGEventGetFlags(event) & kCGEventFlagMaskShift) {
-                newkey = getKeyDataForOya(keycode, 5);
+                newkey = getKeyDataForOya(keycode, ASCII_OUTER_SHIFT);
                 
-                if (newkey.length == 3 && (CGKeyCode)(*(unsigned char *)(newkey.bytes) & 0xff) == kVK_Shift && (CGKeyCode)(*(unsigned char *)(newkey.bytes + 2) & 0xff) == 0xff) {
+                if (newkey.length == 3 &&
+                  (CGKeyCode)(*(unsigned char *)(newkey.bytes) & 0xff) == kVK_Shift &&
+                  (CGKeyCode)(*(unsigned char *)(newkey.bytes + 2) & 0xff) == 0xff) {
                     // backward compatibility: シフト（英）のキー定義がデフォルト or 1文字のときは returnPt を使う
                     if (! [newkey isEqualToData:[[NSData alloc] initWithBytes:(unsigned char[]){kVK_Shift, keycode, 0xff} length:3]]) {
                         CGEventSetIntegerValueField(event, kCGKeyboardEventKeycode,
@@ -1282,7 +1296,7 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
                     return returnPt(event, source);
                 }
             } else {
-                newkey = getKeyDataForOya(keycode, 4);
+                newkey = getKeyDataForOya(keycode, ASCII_NO_SHIFT);
                 
                 if (newkey.length == 1) {
                     // backward compatibility: 単独打鍵（英）のキー定義がデフォルト or 1文字のときは returnPt を使う
@@ -1473,19 +1487,56 @@ static inline void fireTimer() {
     [self_ timerFired:nil];
 }
 
+static inline NSData *getKeyDataForASCII_LTHUMB(CGKeyCode keycode){
+    unsigned char keymap[] = {0x5D, 0xFF, 0xFF, 0x2C, 0xFF, 0xFF, 0x38, 0x1B, 0xFF, 0x38, 0x1E, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x2A, 0xFF, 0x38, 0x2C, 0xFF, 0x38, 0x29, 0xFF, 0x1B, 0xFF, 0xFF, 0x1E, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x2A, 0xFF, 0xFF, 0x12, 0xFF, 0xFF, 0x13, 0xFF, 0xFF, 0x14, 0xFF, 0xFF, 0x15, 0xFF, 0xFF, 0x38, 0x5D, 0xFF, 0x17, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x1C, 0xFF, 0xFF, 0x16, 0xFF, 0xFF, 0x1D, 0xFF, 0xFF, 0x1A, 0xFF, 0xFF, 0x19, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x31, 0xFF, 0xFF, 0x38, 0x1C, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x19, 0xFF, 0x38, 0x13, 0xFF, 0xFF, 0xFF, 0xFF, 0x5E, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x18, 0xFF, 0xFF, 0x38, 0x27, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x14, 0xFF};
+    NSData *ret;
+    uint16_t index;
+    if(keycode < LAYOUT_KEY_COUNT - 2){
+        index = keycode;
+    }else if(keycode == kVK_JIS_Yen){
+        index = LAYOUT_KEY_COUNT - 2;
+    }else if(keycode == kVK_JIS_Underscore){
+        index = LAYOUT_KEY_COUNT - 1;
+    }else{
+        return [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1];
+    }
+    
+    ret = [[NSData alloc] initWithBytes: (keymap + index * 3) length:3];
+    return ret;
+}
+
+static inline NSData *getKeyDataForASCII_RTHUMB(CGKeyCode keycode){
+    unsigned char keymap[] = {0x38, 0x00, 0xFF, 0x38, 0x01, 0xFF, 0x38, 0x02, 0xFF, 0x38, 0x03, 0xFF, 0x5E, 0xFF, 0xFF, 0x38, 0x05, 0xFF, 0x38, 0x06, 0xFF, 0x38, 0x07, 0xFF, 0x38, 0x08, 0xFF, 0x38, 0x09, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x0B, 0xFF, 0x38, 0x0C, 0xFF, 0x38, 0x0D, 0xFF, 0x38, 0x0E, 0xFF, 0x38, 0x0F, 0xFF, 0x38, 0x16, 0xFF, 0x38, 0x11, 0xFF, 0x38, 0x12, 0xFF, 0x38, 0x13, 0xFF, 0x38, 0x14, 0xFF, 0x38, 0x15, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x17, 0xFF, 0x38, 0x1B, 0xFF, 0x38, 0x1C, 0xFF, 0x38, 0x16, 0xFF, 0x1D, 0xFF, 0xFF, 0x38, 0x1A, 0xFF, 0x38, 0x19, 0xFF, 0x38, 0x21, 0xFF, 0x38, 0x22, 0xFF, 0x38, 0x10, 0xFF, 0x38, 0x23, 0xFF, 0x38, 0x20, 0xFF, 0x38, 0x1F, 0xFF, 0xFF, 0xFF, 0xFF, 0x38, 0x28, 0xFF, 0x38, 0x04, 0xFF, 0x38, 0x29, 0xFF, 0x38, 0x26, 0xFF, 0x38, 0x25, 0xFF, 0x38, 0x27, 0xFF, 0x38, 0x2E, 0xFF, 0x2F, 0xFF, 0xFF, 0x38, 0x15, 0xFF, 0x38, 0x2D, 0xFF, 0x2B, 0xFF, 0xFF, 0x38, 0x18, 0xFF, 0x38, 0x2C, 0xFF};
+    NSData *ret;
+    uint16_t index;
+    if(keycode < LAYOUT_KEY_COUNT - 2){
+        index = keycode;
+    }else if(keycode == kVK_JIS_Yen){
+        index = LAYOUT_KEY_COUNT - 2;
+    }else if(keycode == kVK_JIS_Underscore){
+        index = LAYOUT_KEY_COUNT - 1;
+    }else{
+        return [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1];
+    }
+    
+    ret = [[NSData alloc] initWithBytes: (keymap + index * 3) length:3];
+    return ret;
+}
+
 static inline NSData *getKeyDataForOya(CGKeyCode keycode, unsigned char oya) {
     NSData *ret;
-    if(oya > 6){
-        ret = [[NSData alloc] initWithBytes: (unsigned char[]){0x38, 0x1e, 0xff} length:3];
-        return ret;
+    if(oya == ASCII_L_THUMB){
+        ret = getKeyDataForASCII_LTHUMB(keycode);
+    }else if(oya == ASCII_R_THUMB){
+        ret = getKeyDataForASCII_RTHUMB(keycode);
+    }else{
+        // original
+        ret = (
+                (keycode < LAYOUT_KEY_COUNT - 2) ? [(ViewDataModel *)prefLayout[keycode] getKeyData:oya] :
+                (keycode == kVK_JIS_Yen) ? [(ViewDataModel *)prefLayout[(LAYOUT_KEY_COUNT - 2)] getKeyData:oya] :
+                (keycode == kVK_JIS_Underscore) ? [(ViewDataModel *)prefLayout[(LAYOUT_KEY_COUNT - 1)] getKeyData:oya] :
+                [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1]);
     }
-
-    // original
-    ret = (
-            (keycode < LAYOUT_KEY_COUNT - 2) ? [(ViewDataModel *)prefLayout[keycode] getKeyData:oya] :
-            (keycode == kVK_JIS_Yen) ? [(ViewDataModel *)prefLayout[(LAYOUT_KEY_COUNT - 2)] getKeyData:oya] :
-            (keycode == kVK_JIS_Underscore) ? [(ViewDataModel *)prefLayout[(LAYOUT_KEY_COUNT - 1)] getKeyData:oya] :
-            [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1]);
     debugOut(@"[getKeyDataForOya] Keycode=%d, oya=%d, ret=%@\n", keycode, oya, ret);
     return ret;
 }
@@ -1578,11 +1629,11 @@ static void pressKeys(CGEventSourceRef source, pid_t targetPid, NSData *newkey, 
             newkey = getKeyDataForOya(keycode, gOya);
         }else{
             if(gOya == 0){
-                newkey = getKeyDataForOya(keycode, 4);
+                newkey = getKeyDataForOya(keycode, ASCII_NO_SHIFT);
             }else if(gOya == 1){
-                newkey = getKeyDataForOya(keycode, 7);
+                newkey = getKeyDataForOya(keycode, ASCII_L_THUMB);
             }else{
-                newkey = getKeyDataForOya(keycode, 8);
+                newkey = getKeyDataForOya(keycode, ASCII_R_THUMB);
             }
         }
         debugOut(@"[OYA] Keycode=%d, gOya=%d, newKey=%@\n", keycode, gOya, newkey);
