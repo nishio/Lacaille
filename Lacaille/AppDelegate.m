@@ -91,7 +91,7 @@ int backSpaceCount = 0;
 int japaneseCharacterCount = 0;
 
 - (IBAction)refreshCount:(id)sender{
-    NSString* format = @"[BackSpace] %d\n[Japanese] %d";
+    NSString* format = @"BackSpace: %d\nJapanese: %d";
     NSString* s = [NSString stringWithFormat:format, backSpaceCount, japaneseCharacterCount];
     self.multiPurposeOutput.stringValue = s;
 }
