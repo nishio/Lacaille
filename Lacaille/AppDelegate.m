@@ -1262,7 +1262,7 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
         }
         return returnPt(event, source);
     }
-    
+    /*
     if (!gKanaMethod) {
         gOya = 0;
         gPrevOya = 0;
@@ -1310,12 +1310,17 @@ static CGEventRef keyUpDownEventCallback(CGEventTapProxy proxy, CGEventType type
         }
         return returnPt(event, source);
     }
+    */
     
     if (myCGEventGetFlags(event) & kCGEventFlagMaskShift) {
         if (keycode < 0x0A || (0x0A < keycode && keycode < 0x24) || (0x24 < keycode && keycode < 0x30) || keycode == kVK_JIS_Yen || keycode == kVK_JIS_Underscore) {
             
-            NSData *newkey = getKeyDataForOya(keycode, 3);
-            
+            NSData *newkey;
+            if(gKanaMethod){
+                newkey = getKeyDataForOya(keycode, 3);  // @"With outer shift"
+            }else{
+                newkey = getKeyDataForOya(keycode, 8);  // @"With outer shift"
+            }
             if (newkey.length == 3 && (CGKeyCode)(*(unsigned char *)(newkey.bytes) & 0xff) == kVK_Shift && (CGKeyCode)(*(unsigned char *)(newkey.bytes + 2) & 0xff) == 0xff) {
                 // backward compatibility: 小指シフトのキー定義がデフォルト or 1文字のときは returnPt を使う
                 if (! [newkey isEqualToData:[[NSData alloc] initWithBytes:(unsigned char[]){kVK_Shift, keycode, 0xff} length:3]]) {
@@ -1469,10 +1474,20 @@ static inline void fireTimer() {
 }
 
 static inline NSData *getKeyDataForOya(CGKeyCode keycode, unsigned char oya) {
-    return ((keycode < LAYOUT_KEY_COUNT - 2) ? [(ViewDataModel *)prefLayout[keycode] getKeyData:oya] :
+    NSData *ret;
+    if(oya > 6){
+        ret = [[NSData alloc] initWithBytes: (unsigned char[]){0x38, 0x1e, 0xff} length:3];
+        return ret;
+    }
+
+    // original
+    ret = (
+            (keycode < LAYOUT_KEY_COUNT - 2) ? [(ViewDataModel *)prefLayout[keycode] getKeyData:oya] :
             (keycode == kVK_JIS_Yen) ? [(ViewDataModel *)prefLayout[(LAYOUT_KEY_COUNT - 2)] getKeyData:oya] :
             (keycode == kVK_JIS_Underscore) ? [(ViewDataModel *)prefLayout[(LAYOUT_KEY_COUNT - 1)] getKeyData:oya] :
             [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1]);
+    debugOut(@"[getKeyDataForOya] Keycode=%d, oya=%d, ret=%@\n", keycode, oya, ret);
+    return ret;
 }
 
 static void pressKeys(CGEventSourceRef source, pid_t targetPid, NSData *newkey, CGEventFlags mask) {
@@ -1558,7 +1573,18 @@ static void pressKeys(CGEventSourceRef source, pid_t targetPid, NSData *newkey, 
         
     } else if (keycode != 0xff) {
         gPressedOya = 0;
-        NSData *newkey = getKeyDataForOya(keycode, gOya);
+        NSData *newkey;
+        if(gKanaMethod){
+            newkey = getKeyDataForOya(keycode, gOya);
+        }else{
+            if(gOya == 0){
+                newkey = getKeyDataForOya(keycode, 4);
+            }else if(gOya == 1){
+                newkey = getKeyDataForOya(keycode, 7);
+            }else{
+                newkey = getKeyDataForOya(keycode, 8);
+            }
+        }
         debugOut(@"[OYA] Keycode=%d, gOya=%d, newKey=%@\n", keycode, gOya, newkey);
         pressKeys(source, targetPid, newkey, (CGEventFlags)0);
     }
