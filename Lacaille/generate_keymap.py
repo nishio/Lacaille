@@ -89,7 +89,7 @@ def test_JIS_KEY_LAYOUT():
 
 SHIFTED_KEYS, BASE_KEYS = (
     "!#$%&'()=~`{}*+?<>|" + "\"" + ascii_uppercase,
-    "13456789-^@[]:;/<>¥" + "2" + ascii_lowercase
+    "13456789-^@[]:;/,.¥" + "2" + ascii_lowercase
 )
 SHIFT_MAP = dict(zip(BASE_KEYS, SHIFTED_KEYS))
 REVERSE_SHIFT_MAP = dict(zip(SHIFTED_KEYS, BASE_KEYS))
@@ -143,7 +143,7 @@ assert (shifted_keymap == [
     '!', '"', '#', '$', '%', '&', "'", '(', ')', '0', '=', '~', '|',
     'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '`', '{',
     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '+', '*', '}',
-    'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '?', '_'])
+    'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', '_'])
 
 # My keymap definition
 keymap_for_BASE = [
@@ -160,7 +160,7 @@ keymap_for_RSHIFT = [
     '!', '"', '#', '$', '%', '', '&', "'", '(', ')', '0', '=', '~',
     'Q', 'W', 'E', 'R', 'T', '&', 'Y', 'U', 'I', 'O', 'P', '`',
     'A', 'S', 'D', 'F', 'G', '_', 'H', 'J', 'K', 'L', '+', '*',
-    'Z', 'X', 'C', 'V', 'B', '$', 'N', 'M', ',', '.', '?']
+    'Z', 'X', 'C', 'V', 'B', '$', 'N', 'M', '<', '>', '?']
 
 keymap_for_KANA_BASE = [
     '１', '２', '３', '４', '５', '', '６', '７', '８', '９', '０', '', '',
