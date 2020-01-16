@@ -203,10 +203,14 @@ KANA_MAP = dict(zip(KANA, ROMA))
 LAYOUT_KEY_COUNT = 50
 
 
-def generate_objc(keymap, name="FOO"):
+def generate_keymap_data(keymap, as_string=False, as_int=True):
     assert len(keymap) == len(original_keymap)
 
-    output = ["0xFF, 0xFF, 0xFF"] * LAYOUT_KEY_COUNT
+    if as_string:
+        DEFAULT = "0xFF, 0xFF, 0xFF"
+    else:
+        DEFAULT = [255, 255, 255]
+    output = [DEFAULT] * LAYOUT_KEY_COUNT
     if "\\" in keymap:
         raise RuntimeError("use `¥` instead of `\\`")
     if " " in keymap:
@@ -216,7 +220,10 @@ def generate_objc(keymap, name="FOO"):
         position = original_keymap.index(KEYMAP[keycode])
         newkey = keymap[position]
         newkey = strToKeyData(newkey)
-        newkey = ", ".join(f"0x{x:02X}" for x in newkey)
+        if as_string:
+            newkey = ", ".join(f"0x{x:02X}" for x in newkey)
+        if as_int:
+            newkey = list(map(int, newkey))
         if keycode == kVK_JIS_Yen:
             index = LAYOUT_KEY_COUNT - 2
         elif keycode == kVK_JIS_Underscore:
@@ -225,22 +232,37 @@ def generate_objc(keymap, name="FOO"):
             index = keycode
 
         output[index] = newkey
+    return output
 
+
+def generate_objc(keymap, name="FOO"):
+    output = generate_keymap_data(keymap, as_string=True, as_int=False)
     output = ", ".join(output)
     print(f"unsigned char keymap_{name}[] = {{{output}}};")
 
 
-generate_objc(keymap_for_BASE, "ASCII_BASE")
+if 0:
+    generate_objc(keymap_for_BASE, "ASCII_BASE")
+    generate_objc(keymap_for_LSHIFT, "ASCII_LSHIFT")
+    generate_objc(keymap_for_RSHIFT, "ASCII_RSHIFT")
+    generate_objc(keymap_for_KANA_BASE, "KANA_BASE")
+    generate_objc(keymap_for_KANA_LSHIFT, "KANA_LSHIFT")
+    generate_objc(keymap_for_KANA_RSHIFT, "KANA_RSHIFT")
 
-generate_objc(keymap_for_LSHIFT, "ASCII_LSHIFT")
 
-generate_objc(keymap_for_RSHIFT, "ASCII_RSHIFT")
+def generate_json():
+    output = {}
+    output["ASCII_BASE"] = generate_keymap_data(keymap_for_BASE)
+    output["ASCII_LSHIFT"] = generate_keymap_data(keymap_for_LSHIFT)
+    output["ASCII_RSHIFT"] = generate_keymap_data(keymap_for_RSHIFT)
+    output["KANA_BASE"] = generate_keymap_data(keymap_for_KANA_BASE)
+    output["KANA_LSHIFT"] = generate_keymap_data(keymap_for_KANA_LSHIFT)
+    output["KANA_RSHIFT"] = generate_keymap_data(keymap_for_KANA_RSHIFT)
+    import json
+    json.dump(output, open("/Users/nishio/Dropbox/lacaille.json", "w"), indent=2)
 
-generate_objc(keymap_for_KANA_BASE, "KANA_BASE")
 
-generate_objc(keymap_for_KANA_LSHIFT, "KANA_LSHIFT")
-
-generate_objc(keymap_for_KANA_RSHIFT, "KANA_RSHIFT")
+generate_json()
 
 
 def generate_keylayout(base, lshift, rshift):

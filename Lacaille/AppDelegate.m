@@ -102,6 +102,8 @@ typedef NS_ENUM(NSInteger, LacailleErrorCode) {
 int backSpaceCount = 0;
 int japaneseCharacterCount = 0;
 
+id gKeymapFromJSON;
+
 - (IBAction)refreshCount:(id)sender{
     NSString* format = @"BackSpace: %d\nJapanese: %d";
     NSString* s = [NSString stringWithFormat:format, backSpaceCount, japaneseCharacterCount];
@@ -689,6 +691,13 @@ static int getOyaByIdentifier(NSString *identifier) {
         self.propEnabled = [value intValue] ? YES : NO;
     }
     
+    
+    NSString* jsonPath = @"/Users/nishio/Dropbox/lacaille.json";
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSError *error = nil;
+    gKeymapFromJSON = [NSJSONSerialization JSONObjectWithData:data
+                                              options:kNilOptions
+                                                error:&error];
     return YES;
 }
 static NSData *convKeyData(NSData *in) {
@@ -1506,34 +1515,39 @@ static inline NSData *getKeyDataForOya(CGKeyCode keycode, unsigned char oya) {
     }else{
         return [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1];
     }
-    unsigned char *keymap;
-    
+
+    NSArray* keymap;
     if(oya == ASCII_L_THUMB){
-        keymap = keymap_ASCII_LSHIFT;
+        keymap = gKeymapFromJSON[@"ASCII_LSHIFT"];
     }else if(oya == ASCII_R_THUMB){
-        keymap = keymap_ASCII_RSHIFT;
+        keymap = gKeymapFromJSON[@"ASCII_RSHIFT"];
     }else if(oya == ASCII_NO_SHIFT){
-        keymap = keymap_ASCII_BASE;
+        keymap = gKeymapFromJSON[@"ASCII_BASE"];
     }else if(oya == ASCII_OUTER_SHIFT){
         // you can introduce another keymap
-        keymap = keymap_ASCII_RSHIFT;
+        keymap = gKeymapFromJSON[@"ASCII_RSHIFT"];
     }else if(oya == KANA_NO_SHIFT){
-        keymap = keymap_KANA_BASE;
+        keymap = gKeymapFromJSON[@"KANA_BASE"];
     }else if(oya == KANA_L_THUMB){
-        keymap = keymap_KANA_LSHIFT;
+        keymap = gKeymapFromJSON[@"KANA_LSHIFT"];
     }else if(oya == KANA_R_THUMB){
-        keymap = keymap_KANA_RSHIFT;
+        keymap = gKeymapFromJSON[@"KANA_RSHIFT"];
     }else if(oya == KANA_OUTER_SHIFT){
         // you can introduce another keymap
-        keymap = keymap_ASCII_RSHIFT;
+        keymap = gKeymapFromJSON[@"ASCII_RSHIFT"];
     }else if(oya == WITH_MODIFIER){
         // you can introduce another keymap
-        keymap = keymap_ASCII_BASE;
+        keymap = gKeymapFromJSON[@"ASCII_BASE"];
     }else{
         return [[NSData alloc] initWithBytes:(unsigned char[]){keycode} length:1];
     }
-    
-    ret = [[NSData alloc] initWithBytes: (keymap + index * 3) length:3];
+    NSArray* na_newkey = keymap[index];
+    char newkey[256];
+    unsigned long length = [na_newkey count];
+    for(int i=0; i < length; i++){
+        newkey[i] = [na_newkey[i] intValue];
+    }
+    ret = [[NSData alloc] initWithBytes: newkey length: length];
     debugOut(@"[getKeyDataForOya] Keycode=%d, oya=%d, ret=%@\n", keycode, oya, ret);
     return ret;
 }
