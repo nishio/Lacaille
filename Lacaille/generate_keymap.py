@@ -279,10 +279,12 @@ def generate_keylayout(base, lshift, rshift):
     row3 = [getTri(i) for i in range(25, 37)]
     row4 = [getTri(i) for i in range(37, 48)]
     import json
-    print(json.dumps([row1, row2, row3, row4]))
+    print(json.dumps([row1, row2, row3, row4], ensure_ascii=False))
 
 
 generate_keylayout(keymap_for_BASE, keymap_for_LSHIFT, keymap_for_RSHIFT)
+generate_keylayout(keymap_for_KANA_BASE,
+                   keymap_for_KANA_LSHIFT, keymap_for_KANA_RSHIFT)
 
 
 def keylayout_to_keymap(keylayout):
