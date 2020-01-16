@@ -105,28 +105,27 @@ def test_REVERSE_SHIFT_MAP(x):
 
 def strToKeyData(s):
     """
-    >>> strToKeyData("u").hex()
-    '20ffff'
-    >>> strToKeyData("wo").hex()
-    '0d1fff'
-    >>> strToKeyData("[").hex()
-    '1effff'
-    >>> strToKeyData("{").hex()
-    '381eff'
+    >>> strToKeyData("u")
+    [32]
+    >>> strToKeyData("wo")
+    [13, 31]
+    >>> strToKeyData("[")
+    [30]
+    >>> strToKeyData("{")
+    [56, 30]
     """
-    buf = bytearray([0xFF, 0xFF, 0xFF])
-    i = 0
+    buf = []
+    if s in CUSTOM_SPECIAL_MAP:
+        s = CUSTOM_SPECIAL_MAP[s]
     if s in KANA_MAP:
         s = KANA_MAP[s]
     for c in s:
         if c in REVERSE_SHIFT_MAP:
             c = REVERSE_SHIFT_MAP[c]
-            buf[i] = KEYCODE_SHIFT
-            buf[i + 1] = KEYMAP.index(c)
-            i += 2
+            buf.append(KEYCODE_SHIFT)
+            buf.append(KEYMAP.index(c))
         else:
-            buf[i] = KEYMAP.index(c)
-            i += 1
+            buf.append(KEYMAP.index(c))
     return buf
 
 
@@ -164,7 +163,7 @@ keymap_for_RSHIFT = [
 
 keymap_for_KANA_BASE = [
     '１', '２', '３', '４', '５', '', '６', '７', '８', '９', '０', '', '',
-    '', 'か', 'た', 'こ', 'さ', '「', 'ら', 'ち', 'く', 'つ', 'ほ', '',
+    '🤔', 'か', 'た', 'こ', 'さ', '「', 'ら', 'ち', 'く', 'つ', 'ほ', '',
     'う', 'し', 'て', 'け', 'せ', '」', 'は', 'と', 'き', 'い', 'ん', '：',
     'ね', 'ひ', 'す', 'ふ', 'へ', '', 'め', 'そ', '、', '。', '・']
 keymap_for_KANA_LSHIFT = [
@@ -200,6 +199,18 @@ ROMA = [
     ':', '?']
 KANA_MAP = dict(zip(KANA, ROMA))
 
+
+def to_roma(kana):
+    """
+    >>> to_roma("うさぎ")
+    'usagi'
+    """
+    return "".join(KANA_MAP[c] for c in kana)
+
+
+CUSTOM_SPECIAL_MAP = {
+    "🤔": "nenexa"
+}
 LAYOUT_KEY_COUNT = 50
 
 
