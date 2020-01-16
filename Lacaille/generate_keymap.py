@@ -262,9 +262,6 @@ def generate_json():
     json.dump(output, open("/Users/nishio/Dropbox/lacaille.json", "w"), indent=2)
 
 
-generate_json()
-
-
 def generate_keylayout(base, lshift, rshift):
     def get(xs, i):
         if xs[i]:
@@ -282,11 +279,6 @@ def generate_keylayout(base, lshift, rshift):
     print(json.dumps([row1, row2, row3, row4], ensure_ascii=False))
 
 
-generate_keylayout(keymap_for_BASE, keymap_for_LSHIFT, keymap_for_RSHIFT)
-generate_keylayout(keymap_for_KANA_BASE,
-                   keymap_for_KANA_LSHIFT, keymap_for_KANA_RSHIFT)
-
-
 def keylayout_to_keymap(keylayout):
     print([(x + "   ")[2] for x in keylayout])
     print([(x + "   ")[0] for x in keylayout])
@@ -300,3 +292,7 @@ def test():
 
 if __name__ == "__main__":
     test()
+    generate_json()
+    generate_keylayout(keymap_for_BASE, keymap_for_LSHIFT, keymap_for_RSHIFT)
+    generate_keylayout(keymap_for_KANA_BASE,
+                       keymap_for_KANA_LSHIFT, keymap_for_KANA_RSHIFT)
